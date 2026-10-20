@@ -1,0 +1,221 @@
+/* ==========================================================================
+   TechFix - Hoja de Estilos Principal
+   Diseño profesional, accesible y de alto rendimiento
+   ========================================================================== */
+
+:root {
+    --bg-page: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #ffffff;
+    --bg-muted: #f1f5f9;
+    --border-color: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --brand-blue: #2563eb;
+    --brand-blue-hover: #1d4ed8;
+    --brand-emerald: #059669;
+    --brand-emerald-hover: #047857;
+    --brand-amber: #d97706;
+}
+
+html.dark {
+    --bg-page: #0b0f17;
+    --bg-surface: #111827;
+    --bg-surface-elevated: #1f2937;
+    --bg-muted: #1e293b;
+    --border-color: #374151;
+    --border-strong: #4b5563;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --brand-blue: #3b82f6;
+    --brand-blue-hover: #60a5fa;
+    --brand-emerald: #10b981;
+    --brand-emerald-hover: #34d399;
+    --brand-amber: #f59e0b;
+}
+
+/* Base & Typography */
+body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    overflow-x: hidden;
+}
+
+/* Accesibilidad y foco visible WCAG AA */
+:focus-visible {
+    outline: 2px solid var(--brand-blue);
+    outline-offset: 2px;
+}
+
+/* Espacio reservado para barra fija inferior en móviles */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* Estilos de Antes y Después (Comparison Slider) */
+.comparison-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    user-select: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.12);
+}
+
+.comparison-slider img {
+    display: block;
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.comparison-before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.comparison-before img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 380px;
+    max-width: none;
+}
+
+.comparison-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: #ffffff;
+    cursor: ew-resize;
+    z-index: 3;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+}
+
+.comparison-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 42px;
+    height: 42px;
+    background: #2563eb;
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    font-size: 13px;
+    pointer-events: none;
+}
+
+/* Badge overlay en el slider */
+.comparison-tag {
+    position: absolute;
+    bottom: 16px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    z-index: 4;
+}
+
+.tag-before {
+    left: 16px;
+    background: rgba(185, 28, 28, 0.9);
+    color: #ffffff;
+}
+
+.tag-after {
+    right: 16px;
+    background: rgba(4, 120, 87, 0.9);
+    color: #ffffff;
+}
+
+/* Timeline del Rastreador de Órdenes */
+.timeline-step {
+    position: relative;
+}
+
+.timeline-step::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    width: 100%;
+    height: 3px;
+    background: var(--border-color);
+    z-index: 1;
+}
+
+.timeline-step:last-child::after {
+    display: none;
+}
+
+.timeline-step.completed::after {
+    background: var(--brand-emerald);
+}
+
+.timeline-step.active::after {
+    background: linear-gradient(to right, var(--brand-emerald), var(--border-color));
+}
+
+/* Acordeón FAQ accesible */
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+}
+
+.faq-item.open .faq-content {
+    max-height: 400px;
+    transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+}
+
+.faq-item.open .faq-icon {
+    transform: rotate(180deg);
+}
+
+/* Estilos de botones de dispositivos en cotizador */
+.device-select-btn.active {
+    border-color: var(--brand-blue);
+    background-color: #eff6ff;
+    color: #1d4ed8;
+}
+
+html.dark .device-select-btn.active {
+    background-color: #1e3a8a33;
+    color: #93c5fd;
+    border-color: #3b82f6;
+}
+
+/* Microanimación sutil del pulso de estado */
+@keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.15); }
+}
+
+.status-indicator-dot {
+    animation: status-pulse 2s infinite ease-in-out;
+}
