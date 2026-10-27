@@ -110,9 +110,9 @@ const quoteDatabase = {
             { id: 'mantenimiento', name: 'Mantenimiento térmico (Se calienta y apaga)', time: '2 a 4 horas (Mismo día)', price: '$450 - $850 MXN', note: 'Limpieza de ventiladores y pasta térmica Arctic MX-6' },
             { id: 'pantalla', name: 'Pantalla rota / Líneas en display / Parpadeo', time: 'Una vez que llegue la refacción se hace el cambio (2 a 5 días hábiles)', price: '$1,200 - $3,200 MXN', note: 'Paneles IPS / FHD / 144Hz según modelo' },
             { id: 'bisagras', name: 'Bisagras rotas / Carcasa abierta al cerrar', time: '2 días', price: '$550 - $1,100 MXN', note: 'Reconstrucción con anclajes de resina epóxica' },
-            { id: 'teclado', name: 'Teclado no responde / Teclas sueltas o pegajosas', time: 'Una vez que llegue la refacción se hace el cambio (2 a 5 días hábiles)', price: '$600 - $2,000 MXN', note: 'Instalación de teclado en español con retroiluminación(según modelo)' },
+            { id: 'teclado', name: 'Teclado no responde / Teclas sueltas o pegajosas', time: 'Una vez que llegue la refacción se hace el cambio (2 a 5 días hábiles)', price: '$600 - $2,000 MXN', note: 'Instalación de teclado en español con retroiluminación (según modelo)' },
             {
-                id: 'ssd', name: 'Muy lenta / Actualización a disco SSD + Respaldo', time: 'Una vez que llegue la refacción se hace el cambio (2 a 5 días hábiles)', price: '$750 - $3,500 MXN', note: 'SSD NVMe/SATA hasta 10 veces más rápido que HDD(depende del almacenamiento)'
+                id: 'ssd', name: 'Muy lenta / Actualización a disco SSD + Respaldo', time: 'Una vez que llegue la refacción se hace el cambio (2 a 5 días hábiles)', price: '$750 - $3,500 MXN', note: 'SSD NVMe/SATA hasta 10 veces más rápido que HDD (depende del almacenamiento)'
             },
             { id: 'placa', name: 'No enciende / Luz parpadea pero pantalla negra', time: '2 a 5 días', price: '$850 - $2,500 MXN', note: 'Reparación' }
         ]
@@ -120,18 +120,18 @@ const quoteDatabase = {
     pc: {
         brands: ['PC Gamer Armada a Medida', 'PC de Oficina / Torre Ensamblada', 'HP / Dell / Lenovo (Prearmada)', 'Workstation de Diseño / Arquitectura', 'All-in-One (Todo en Uno)'],
         issues: [
-            { id: 'Armado de PC/Gamer', name: 'Armado de PC/Gamer', time: 'Una vez que lleguen todo los componentes se hace procede armar la PC/Gamer (2 a 5 días hábiles)', price: 'Dependiendo del presupuesto del cliente', note: 'Armado de la PC/Gamer' },
+            { id: 'Armado de PC/Gamer', name: 'Armado de PC/Gamer', time: 'Una vez que lleguen todos los componentes se procede a armar la PC/Gamer (2 a 5 días hábiles)', price: 'Dependiendo del presupuesto del cliente', note: 'Armado de la PC/Gamer' },
             { id: 'mantenimiento', name: 'Mantenimiento preventivo completo y cable management', time: '3 a 5 horas', price: '$450 - $900 MXN', note: 'Desarmado, soplado profundo, pasta térmica y lubricación' },
             { id: 'no_enciende', name: 'No da video o no prende nada (Falla de hardware)', time: '24 horas (Diagnóstico)', price: '$400 - $1,200 MXN', note: 'Pruebas de fuente de poder, RAM, GPU y motherboard' },
             { id: 'formateo', name: 'Formateo seguro con respaldo de fotos y programas', time: '2 a 8 horas (mismo día)', price: '$400 - $800 MXN', note: 'Windows 11/10 limpio con drivers oficiales y paquetería office' },
-            { id: 'upgrade', name: 'Actualización de componentes (GPU, RAM, Fuente, SSD)', time: 'Una vez que llegue la refacción se hace el cambio (2 a 5 días hábiles)', price: 'Dependiendo del tipo de componente a aztualizar', note: 'Mano de obra para la instalación de los componentes' },
+            { id: 'upgrade', name: 'Actualización de componentes (GPU, RAM, Fuente, SSD)', time: 'Una vez que llegue la refacción se hace el cambio (2 a 5 días hábiles)', price: 'Dependiendo del tipo de componente a actualizar', note: 'Mano de obra para la instalación de los componentes' },
         ]
     }
 };
 
 let currentQuote = {
     deviceType: 'celular',
-    brand: 'Apple (iPhone)',
+    brand: 'Samsung Galaxy',
     issueIndex: 0
 };
 
