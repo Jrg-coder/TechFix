@@ -44,9 +44,9 @@ function updateThemeIcon(isDark) {
     const icon = document.getElementById('theme-icon');
     if (!icon) return;
     if (isDark) {
-        icon.className = 'fa-solid fa-sun text-amber-400 text-lg';
+        icon.className = 'fa-solid fa-sun theme-icon-dark';
     } else {
-        icon.className = 'fa-solid fa-moon text-slate-700 text-lg';
+        icon.className = 'fa-solid fa-moon theme-icon-light';
     }
 }
 
@@ -145,9 +145,7 @@ function initQuoteCalculator() {
     // Click en tipo de dispositivo
     deviceButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            deviceButtons.forEach(b => {
-                b.classList.remove('active', 'border-blue-600', 'bg-blue-50', 'text-blue-700', 'dark:bg-blue-950/40', 'dark:border-blue-500');
-            });
+            deviceButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             currentQuote.deviceType = btn.dataset.device;
@@ -528,12 +526,8 @@ function initComparisonSlider() {
     // Selector de casos de antes/después
     caseButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            caseButtons.forEach(b => {
-                b.classList.remove('bg-blue-600', 'text-white');
-                b.classList.add('bg-white', 'text-slate-700', 'dark:bg-slate-800', 'dark:text-slate-300');
-            });
-            btn.classList.remove('bg-white', 'text-slate-700', 'dark:bg-slate-800', 'dark:text-slate-300');
-            btn.classList.add('bg-blue-600', 'text-white');
+            caseButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
             const caseKey = btn.dataset.case;
             loadSliderCase(caseKey);
@@ -709,29 +703,37 @@ function initBusinessHoursStatus() {
         const contactNote = document.getElementById('contact-status-note');
 
         if (isOpen) {
-            if (statusBadge) statusBadge.className = 'inline-flex items-center text-emerald-400 font-semibold';
-            if (statusDot) statusDot.className = 'w-2 h-2 rounded-full bg-emerald-400 mr-2 status-indicator-dot';
+            if (statusBadge) {
+                statusBadge.classList.add('status-open');
+                statusBadge.classList.remove('status-closed');
+            }
             if (statusText) statusText.textContent = 'Disponible';
 
-            if (heroPill) heroPill.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800';
-            if (heroDot) heroDot.className = 'w-2 h-2 rounded-full bg-emerald-500 mr-2 status-indicator-dot';
+            if (heroPill) {
+                heroPill.classList.add('status-open');
+                heroPill.classList.remove('status-closed');
+            }
             if (heroText) heroText.textContent = 'Disponible';
 
             if (contactNote) {
-                contactNote.className = 'text-emerald-600 dark:text-emerald-400 font-semibold mt-1';
+                contactNote.style.color = 'var(--brand-emerald)';
                 contactNote.textContent = '● Actualmente Disponible';
             }
         } else {
-            if (statusBadge) statusBadge.className = 'inline-flex items-center text-amber-400 font-semibold';
-            if (statusDot) statusDot.className = 'w-2 h-2 rounded-full bg-amber-400 mr-2';
+            if (statusBadge) {
+                statusBadge.classList.add('status-closed');
+                statusBadge.classList.remove('status-open');
+            }
             if (statusText) statusText.textContent = 'Fuera de servicio';
 
-            if (heroPill) heroPill.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800';
-            if (heroDot) heroDot.className = 'w-2 h-2 rounded-full bg-amber-500 mr-2';
+            if (heroPill) {
+                heroPill.classList.add('status-closed');
+                heroPill.classList.remove('status-open');
+            }
             if (heroText) heroText.textContent = 'Fuera de servicio';
 
             if (contactNote) {
-                contactNote.className = 'text-amber-600 dark:text-amber-400 font-semibold mt-1';
+                contactNote.style.color = 'var(--brand-amber)';
                 contactNote.textContent = '○ Fuera de servicio (Abrimos según horario)';
             }
         }

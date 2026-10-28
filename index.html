@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth scroll-pt-28 md:scroll-pt-32">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -7,24 +7,6 @@
     <meta name="description" content="TechFix - Servicio técnico especializado en reparación de celulares, tablets, laptops y computadoras PC. Diagnóstico en mostrador y refacciones de calidad comprobada.">
     <meta name="theme-color" content="#0f172a">
     <title>TechFix | Reparación de Celulares, Tablets, Laptops y PC</title>
-
-    <!-- Tailwind CSS CDN y Configuración -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        slate: {
-                            850: '#151f32',
-                            950: '#070b12'
-                        }
-                    }
-                }
-            }
-        };
-    </script>
 
     <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,94 +18,90 @@
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <!-- Estilos Personalizados -->
+    <!-- Estilos de la Aplicación (Vanilla CSS Completo) -->
     <link rel="stylesheet" href="css/styles.css">
 
     <!-- Lógica de la Aplicación -->
     <script src="js/app.js" defer></script>
 </head>
 
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+<body>
 
     <!-- =====================================================================
          1. ENCABEZADO Y NAVEGACIÓN PRINCIPAL
          ===================================================================== -->
-    <header class="sticky top-0 z-40 transition-colors shadow-sm">
-        <!-- Barra Superior de Horario y Estado -->
-        <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
-            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
-                <div class="flex items-center space-x-4">
-                    <span id="business-status-badge" class="inline-flex items-center text-emerald-400 font-semibold">
-                        <span id="business-status-dot" class="w-2 h-2 rounded-full bg-emerald-400 mr-2 status-indicator-dot"></span>
+    <header class="site-header">
+        <!-- Barra Superior de Información y Horario -->
+        <div class="top-bar">
+            <div class="container top-bar-inner">
+                <div>
+                    <span id="business-status-badge" class="status-indicator status-open">
+                        <span id="business-status-dot" class="status-indicator-dot"></span>
                         <span id="business-status-text">Disponible</span>
                     </span>
                 </div>
-                <div class="flex items-center space-x-4 font-medium">
-                    <a href="tel:529711601042" class="hover:text-white transition-colors">
-                        <i class="fa-solid fa-phone text-blue-400 mr-1.5"></i> +52 971 160 1042
+                <div class="top-bar-links">
+                    <a href="tel:529711601042">
+                        <i class="fa-solid fa-phone text-blue" style="margin-right: 0.375rem;"></i> +52 971 160 1042
                     </a>
-                    <span class="text-slate-600">|</span>
+                    <span class="top-bar-separator">|</span>
                     <span id="top-bar-hours">Lun - Sáb: 9am a 8pm | Dom: 11am a 6pm</span>
                 </div>
             </div>
         </div>
 
-        <!-- Barra de Navegación Principal -->
-        <div class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <!-- Barra de Navegación -->
+        <div class="navbar">
+            <div class="container navbar-inner">
 
                 <!-- Logotipo -->
-                <a href="#" class="flex items-center space-x-3 group focus:outline-none">
-                    <div class="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-600/30 group-hover:bg-blue-700 transition-all">
-                        <i class="fa-solid fa-microchip text-xl"></i>
+                <a href="#" class="logo">
+                    <div class="logo-badge">
+                        <i class="fa-solid fa-microchip"></i>
                     </div>
                     <div>
-                        <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">Tech<span class="text-blue-600 dark:text-blue-400">Fix</span></span>
-                        <span class="block text-[10px] font-semibold tracking-wider uppercase text-slate-500 dark:text-slate-400 -mt-1">Servicio Técnico</span>
+                        <span class="logo-title">Tech<span class="logo-title-accent">Fix</span></span>
+                        <span class="logo-subtitle">Servicio Técnico</span>
                     </div>
                 </a>
 
                 <!-- Enlaces de Navegación (Escritorio) -->
-                <nav class="hidden lg:flex items-center space-x-7 text-sm font-semibold text-slate-700 dark:text-slate-300">
-                    <a href="#servicios" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Servicios</a>
-                    <a href="#cotizador" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Cotizador Express</a>
-                    <a href="#comparativa" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Antes y Después</a>
-                    <a href="#faq" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Preguntas</a>
-                    <a href="#contacto" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contacto</a>
+                <nav class="nav-links">
+                    <a href="#servicios">Servicios</a>
+                    <a href="#cotizador">Cotizador Express</a>
+                    <a href="#comparativa">Antes y Después</a>
+                    <a href="#faq">Preguntas</a>
+                    <a href="#contacto">Contacto</a>
                 </nav>
 
-                <!-- Acciones Rápidas (Modo Oscuro + WhatsApp + Menú Hamburguesa) -->
-                <div class="flex items-center space-x-3">
-                    <button id="theme-toggle" type="button" aria-label="Cambiar tema claro u oscuro"
-                        class="w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors">
-                        <i id="theme-icon" class="fa-solid fa-moon text-slate-700 text-lg"></i>
+                <!-- Acciones Rápidas (Modo Oscuro + WhatsApp + Menú Móvil) -->
+                <div class="nav-actions">
+                    <button id="theme-toggle" type="button" aria-label="Cambiar tema claro u oscuro" class="theme-toggle-btn">
+                        <i id="theme-icon" class="fa-solid fa-moon theme-icon-dark"></i>
                     </button>
 
                     <a href="https://wa.me/529711601042?text=Hola%20TechFix,%20deseo%20consultar%20por%20la%20reparaci%C3%B3n%20de%20un%20equipo."
-                        target="_blank" rel="noopener noreferrer"
-                        class="hidden sm:inline-flex items-center px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs shadow-md shadow-emerald-600/20 transition-all">
-                        <i class="fa-brands fa-whatsapp text-base mr-2"></i> WhatsApp Directo
+                        target="_blank" rel="noopener noreferrer" class="btn-whatsapp-header">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1rem;"></i> WhatsApp Directo
                     </a>
 
-                    <button id="mobile-menu-btn" type="button" aria-label="Abrir menú de navegación" aria-expanded="false"
-                        class="lg:hidden w-11 h-11 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-200 text-xl focus:outline-none">
+                    <button id="mobile-menu-btn" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" class="mobile-menu-btn">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Menú Móvil Desplegable -->
-            <div id="mobile-menu" class="hidden lg:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-3 pb-6 space-y-3">
-                <a href="#servicios" class="block py-2 text-base font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600">Servicios Técnicos</a>
-                <a href="#cotizador" class="block py-2 text-base font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600">Cotizador Express</a>
-                <a href="#comparativa" class="block py-2 text-base font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600">Casos Antes / Después</a>
-                <a href="#faq" class="block py-2 text-base font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600">Preguntas Frecuentes</a>
-                <a href="#contacto" class="block py-2 text-base font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600">Ubicación y Teléfono</a>
-                <div class="pt-3 border-t border-slate-100 dark:border-slate-800">
+            <div id="mobile-menu" class="mobile-menu-dropdown hidden">
+                <a href="#servicios">Servicios Técnicos</a>
+                <a href="#cotizador">Cotizador Express</a>
+                <a href="#comparativa">Casos Antes / Después</a>
+                <a href="#faq">Preguntas Frecuentes</a>
+                <a href="#contacto">Ubicación y Teléfono</a>
+                <div class="mobile-menu-footer">
                     <a href="https://wa.me/529711601042?text=Hola%20TechFix,%20necesito%20atenci%C3%B3n%20para%20un%20equipo."
-                        target="_blank" rel="noopener noreferrer"
-                        class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-center block text-sm shadow-md">
-                        <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Chatear por WhatsApp (+52 971 160 1042)
+                        target="_blank" rel="noopener noreferrer" class="btn-whatsapp-full">
+                        <i class="fa-brands fa-whatsapp" style="margin-right: 0.5rem; font-size: 1.125rem;"></i> Chatear por WhatsApp (+52 971 160 1042)
                     </a>
                 </div>
             </div>
@@ -134,85 +112,80 @@
         <!-- =====================================================================
              2. SECCIÓN HERO (PROPUESTA DE VALOR Y ESTADO EN VIVO)
              ===================================================================== -->
-        <section class="py-16 md:py-24 bg-gradient-to-b from-blue-50/50 via-slate-50 to-white dark:from-slate-900/60 dark:via-slate-950 dark:to-slate-950 border-b border-slate-200 dark:border-slate-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-grid">
 
                     <!-- Columna de Texto -->
-                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                        <div class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-blue-100/80 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold tracking-wide">
-                            <i class="fa-solid fa-wrench mr-2 text-blue-600 dark:text-blue-400"></i>
-                            Taller de Reparación en Celulares, Tablets, Laptops & PC
+                    <div class="hero-text-col">
+                        <div class="hero-pill-badge">
+                            <i class="fa-solid fa-wrench"></i> Taller de Reparación en Celulares, Tablets, Laptops & PC
                         </div>
 
-                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+                        <h1 class="hero-title">
                             Reparamos tu equipo con diagnóstico claro
                         </h1>
 
-                        <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        <p class="hero-description">
                             No improvisamos con tus herramientas de trabajo. Diagnosticamos sin costo en mostrador, usamos refacciones probadas grado original o de la calidad que desees, todo transparente.
                         </p>
 
                         <!-- Botones de Acción -->
-                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                            <a href="#cotizador"
-                                class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-600/25 transition-all">
-                                <i class="fa-solid fa-calculator mr-2 text-xs"></i>
+                        <div class="hero-actions">
+                            <a href="#cotizador" class="btn btn-primary">
+                                <i class="fa-solid fa-calculator" style="font-size: 0.8125rem;"></i>
                                 Cotizar en Línea (30s)
                             </a>
                             <a href="https://wa.me/529711601042?text=Hola,%20quisiera%20saber%20si%20puedo%20llevar%20mi%20equipo%20a%20revisi%C3%B3n%20hoy."
-                                target="_blank" rel="noopener noreferrer"
-                                class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/20 transition-all">
-                                <i class="fa-brands fa-whatsapp text-lg mr-2"></i>
+                                target="_blank" rel="noopener noreferrer" class="btn btn-emerald">
+                                <i class="fa-brands fa-whatsapp" style="font-size: 1.125rem;"></i>
                                 WhatsApp Inmediato
                             </a>
                         </div>
                     </div>
 
                     <!-- Columna: Tarjeta de Estado del Taller -->
-                    <div class="lg:col-span-5">
-                        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-xl relative overflow-hidden">
-                            <div class="flex items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                    <div>
+                        <div class="workshop-card">
+                            <div class="workshop-card-header">
+                                <div class="workshop-card-title-group">
+                                    <div class="workshop-icon-box">
                                         <i class="fa-solid fa-screwdriver-wrench"></i>
                                     </div>
                                     <div>
-                                        <h2 class="text-base font-bold text-slate-900 dark:text-white">Estado del Taller</h2>
-                                        <p class="text-xs text-slate-500 dark:text-slate-400">Mostrador (Horarios de atención)</p>
+                                        <h2 class="workshop-card-title">Estado del Taller</h2>
+                                        <p class="workshop-card-subtitle">Mostrador (Horarios de atención)</p>
                                     </div>
                                 </div>
-                                <span id="hero-status-pill"
-                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
-                                    <span id="hero-status-dot" class="w-2 h-2 rounded-full bg-emerald-500 mr-2 status-indicator-dot"></span>
+                                <span id="hero-status-pill" class="status-badge-pill status-open">
+                                    <span id="hero-status-dot" class="status-indicator-dot"></span>
                                     <span id="hero-status-text">Disponible</span>
                                 </span>
                             </div>
 
-                            <div class="py-5 space-y-3.5">
-                                <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <i class="fa-solid fa-mobile-screen text-blue-600 dark:text-blue-400"></i>
-                                        <span class="text-xs font-semibold text-slate-700 dark:text-slate-200">Display/Touch</span>
+                            <div class="workshop-services-list">
+                                <div class="workshop-service-row">
+                                    <div class="workshop-service-info">
+                                        <i class="fa-solid fa-mobile-screen"></i>
+                                        <span class="workshop-service-label">Display/Touch</span>
                                     </div>
-                                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-0.5 rounded-md">Bajo pedido</span>
+                                    <span class="tag-badge tag-emerald">Bajo pedido</span>
                                 </div>
 
-                                <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <i class="fa-solid fa-laptop text-blue-600 dark:text-blue-400"></i>
-                                        <span class="text-xs font-semibold text-slate-700 dark:text-slate-200">Mantenimiento de Laptops</span>
+                                <div class="workshop-service-row">
+                                    <div class="workshop-service-info">
+                                        <i class="fa-solid fa-laptop"></i>
+                                        <span class="workshop-service-label">Mantenimiento de Laptops</span>
                                     </div>
-                                    <span class="text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 px-2.5 py-0.5 rounded-md">Mismo Día (Urgente)</span>
+                                    <span class="tag-badge tag-blue">Mismo Día (Urgente)</span>
                                 </div>
                             </div>
 
-                            <div class="pt-3">
+                            <div>
                                 <a href="https://wa.me/529711601042?text=Hola,%20tengo%20una%20urgencia%20con%20mi%20equipo."
-                                    target="_blank" rel="noopener noreferrer"
-                                    class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white text-xs font-bold flex items-center justify-between transition-colors shadow-sm">
+                                    target="_blank" rel="noopener noreferrer" class="workshop-card-cta">
                                     <span>¿Tienes una urgencia técnica? Escríbenos</span>
-                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                    <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                             </div>
                         </div>
@@ -225,133 +198,126 @@
         <!-- =====================================================================
              3. SECCIÓN: COTIZADOR EXPRESS INTERACTIVO
              ===================================================================== -->
-        <section id="cotizador" class="py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="cotizador" class="quote-section">
+            <div class="container">
 
-                <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
-                    <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Calculadora de Presupuesto</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Cotizador Express en Línea</h2>
-                    <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+                <div class="section-header">
+                    <span class="section-eyebrow">Calculadora de Presupuesto</span>
+                    <h2 class="section-title">Cotizador Express en Línea</h2>
+                    <p class="section-description">
                         Selecciona el tipo de equipo, marca y falla para conocer el tiempo de entrega y el rango de costo estimado antes de visitarnos.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="quote-grid">
 
                     <!-- Controles del Cotizador (Pasos 1, 2 y 3) -->
-                    <div class="lg:col-span-7 bg-slate-50 dark:bg-slate-850 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-6">
+                    <div class="quote-controls-card">
 
                         <!-- Paso 1: Tipo de Dispositivo -->
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+                            <label class="quote-step-title">
                                 1. Selecciona tu dispositivo
                             </label>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                <button type="button" data-device="celular"
-                                    class="device-select-btn active flex flex-col items-center justify-center p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-400 text-slate-700 dark:text-slate-200 transition-all">
-                                    <i class="fa-solid fa-mobile-screen-button text-2xl mb-1.5 text-blue-600 dark:text-blue-400"></i>
-                                    <span class="text-xs font-bold">Celular</span>
+                            <div class="device-buttons-grid">
+                                <button type="button" data-device="celular" class="device-select-btn active">
+                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                                    <span>Celular</span>
                                 </button>
-                                <button type="button" data-device="tablet"
-                                    class="device-select-btn flex flex-col items-center justify-center p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-400 text-slate-700 dark:text-slate-200 transition-all">
-                                    <i class="fa-solid fa-tablet-screen-button text-2xl mb-1.5 text-blue-600 dark:text-blue-400"></i>
-                                    <span class="text-xs font-bold">Tablet / iPad</span>
+                                <button type="button" data-device="tablet" class="device-select-btn">
+                                    <i class="fa-solid fa-tablet-screen-button"></i>
+                                    <span>Tablet / iPad</span>
                                 </button>
-                                <button type="button" data-device="laptop"
-                                    class="device-select-btn flex flex-col items-center justify-center p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-400 text-slate-700 dark:text-slate-200 transition-all">
-                                    <i class="fa-solid fa-laptop text-2xl mb-1.5 text-blue-600 dark:text-blue-400"></i>
-                                    <span class="text-xs font-bold">Laptop</span>
+                                <button type="button" data-device="laptop" class="device-select-btn">
+                                    <i class="fa-solid fa-laptop"></i>
+                                    <span>Laptop</span>
                                 </button>
-                                <button type="button" data-device="pc"
-                                    class="device-select-btn flex flex-col items-center justify-center p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-400 text-slate-700 dark:text-slate-200 transition-all">
-                                    <i class="fa-solid fa-desktop text-2xl mb-1.5 text-blue-600 dark:text-blue-400"></i>
-                                    <span class="text-xs font-bold">PC / Gamer</span>
+                                <button type="button" data-device="pc" class="device-select-btn">
+                                    <i class="fa-solid fa-desktop"></i>
+                                    <span>PC / Gamer</span>
                                 </button>
                             </div>
                         </div>
 
                         <!-- Paso 2: Marca o Fabricante -->
-                        <div>
-                            <label for="quote-brand" class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+                        <div class="form-field">
+                            <label for="quote-brand" class="quote-step-title">
                                 2. Marca o Fabricante
                             </label>
-                            <select id="quote-brand"
-                                class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <select id="quote-brand" class="form-select">
                                 <!-- Opciones cargadas dinámicamente por js/app.js -->
                             </select>
                         </div>
 
                         <!-- Paso 3: Falla / Reparación -->
-                        <div>
-                            <label for="quote-issue" class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+                        <div class="form-field">
+                            <label for="quote-issue" class="quote-step-title">
                                 3. ¿Qué problema presenta tu equipo?
                             </label>
-                            <select id="quote-issue"
-                                class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <select id="quote-issue" class="form-select">
                                 <!-- Opciones cargadas dinámicamente por js/app.js -->
                             </select>
                         </div>
 
                         <!-- Nota orientativa -->
-                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                            <i class="fa-solid fa-circle-info text-blue-500 mr-1"></i>
+                        <p class="quote-disclaimer">
+                            <i class="fa-solid fa-circle-info"></i>
                             Los rangos de precio son orientativos y contemplan refacción y mano de obra. El presupuesto final exacto se confirma en mostrador tras la inspección física.
                         </p>
                     </div>
 
                     <!-- Tarjeta de Resumen en Tiempo Real -->
-                    <div class="lg:col-span-5 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-6 sm:p-8 shadow-xl space-y-6">
-                        <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-700">
+                    <div class="quote-summary-card">
+                        <div class="summary-header">
                             <div>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Resumen Estimado</span>
-                                <h3 id="summary-device" class="text-lg font-bold text-slate-900 dark:text-white">Celular / Smartphone</h3>
+                                <span class="summary-eyebrow">Resumen Estimado</span>
+                                <h3 id="summary-device" class="summary-device-title">Celular / Smartphone</h3>
                             </div>
-                            <span class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                            <span class="summary-icon-box">
                                 <i class="fa-solid fa-receipt"></i>
                             </span>
                         </div>
 
-                        <div class="space-y-4">
+                        <div class="summary-details">
                             <div>
-                                <p class="text-xs text-slate-500 dark:text-slate-400">Servicio Seleccionado:</p>
-                                <p id="summary-issue" class="text-sm font-semibold text-slate-800 dark:text-slate-200">Pantalla rota / Táctil dañado</p>
-                                <p id="summary-note" class="text-xs text-blue-600 dark:text-blue-400 mt-0.5">Calidad Original / OLED con True Tone</p>
+                                <p class="metric-label">Servicio Seleccionado:</p>
+                                <p id="summary-issue" class="summary-issue-title">Pantalla rota / Táctil dañado</p>
+                                <p id="summary-note" class="summary-issue-note">Calidad Original / OLED con True Tone</p>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-700/60">
+                            <div class="summary-metrics-grid">
                                 <div>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Tiempo de Entrega</p>
-                                    <p id="summary-time" class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">45 a 90 min</p>
+                                    <p class="metric-label">Tiempo de Entrega</p>
+                                    <p id="summary-time" class="metric-value-time">45 a 90 min</p>
                                 </div>
                                 <div>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Costo Estimado</p>
-                                    <p id="summary-price" class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400 mt-0.5">$650 - $2,400 MXN</p>
+                                    <p class="metric-label">Costo Estimado</p>
+                                    <p id="summary-price" class="metric-value-price">$650 - $2,400 MXN</p>
                                 </div>
                             </div>
 
-                            <div class="space-y-2 pt-2">
-                                <p class="text-xs font-bold text-slate-700 dark:text-slate-300">Incluido en cada intervención:</p>
-                                <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
-                                    <li class="flex items-center">
-                                        <i class="fa-solid fa-check text-emerald-500 mr-2 text-xs"></i> Mano de obra
+                            <div class="included-services">
+                                <p class="included-title">Incluido en cada intervención:</p>
+                                <ul class="included-list">
+                                    <li>
+                                        <i class="fa-solid fa-check"></i> Mano de obra
                                     </li>
-                                    <li class="flex items-center">
-                                        <i class="fa-solid fa-check text-emerald-500 mr-2 text-xs"></i> Refacción
+                                    <li>
+                                        <i class="fa-solid fa-check"></i> Refacción
                                     </li>
-                                    <li class="flex items-center">
-                                        <i class="fa-solid fa-check text-emerald-500 mr-2 text-xs"></i> Limpieza superficial de puertos y rejillas
+                                    <li>
+                                        <i class="fa-solid fa-check"></i> Limpieza superficial de puertos y rejillas
                                     </li>
                                 </ul>
                             </div>
                         </div>
 
-                        <div class="pt-2">
-                            <button id="quote-whatsapp-btn" type="button"
-                                class="w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 flex items-center justify-center transition-all">
-                                <i class="fa-brands fa-whatsapp text-xl mr-2"></i>
+                        <div>
+                            <button id="quote-whatsapp-btn" type="button" class="btn-whatsapp-quote">
+                                <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i>
                                 Enviar Cotización por WhatsApp
                             </button>
-                            <p class="text-center text-[11px] text-slate-400 mt-2">Te contestamos en menos de 10 minutos en horario laboral.</p>
+                            <p class="quote-reply-note">Te contestamos en menos de 10 minutos en horario laboral.</p>
                         </div>
                     </div>
 
@@ -362,163 +328,144 @@
         <!-- =====================================================================
              4. SECCIÓN: SERVICIOS POR DISPOSITIVO
              ===================================================================== -->
-        <section id="servicios" class="py-20 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="servicios" class="services-section">
+            <div class="container">
 
-                <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
-                    <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Catálogo</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Reparación por Dispositivo</h2>
-                    <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+                <div class="section-header">
+                    <span class="section-eyebrow">Catálogo</span>
+                    <h2 class="section-title">Reparación por Dispositivo</h2>
+                    <p class="section-description">
                         Cada tipo de equipo requiere herramientas, consumibles y procedimientos específicos.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="services-grid">
 
                     <!-- Ficha 1: Celulares -->
-                    <article class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:shadow-lg transition-all">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl">
+                    <article class="service-card">
+                        <div>
+                            <div class="service-icon-box service-icon-blue">
                                 <i class="fa-solid fa-mobile-screen-button"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Celulares</h3>
-                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            <h3 class="service-title">Celulares</h3>
+                            <p class="service-desc">
                                 Reparación de smartphones y calibración de funciones nativas.
                             </p>
-                            <ul class="text-xs text-slate-700 dark:text-slate-300 space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-blue-600 dark:text-blue-400 mr-2 text-[10px]"></i>
-                                    Display OLED, AMOLED e IPS
+                            <ul class="service-features-list">
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Display OLED, AMOLED e IPS
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-blue-600 dark:text-blue-400 mr-2 text-[10px]"></i>
-                                    Baterías al 100% de salud
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Baterías al 100% de salud
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-blue-600 dark:text-blue-400 mr-2 text-[10px]"></i>
-                                    Centros de carga Tipo-C y Lightning
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Centros de carga Tipo-C y Lightning
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-blue-600 dark:text-blue-400 mr-2 text-[10px]"></i>
-                                    Cristal trasero y cámaras
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Cristal trasero y cámaras
                                 </li>
                             </ul>
                         </div>
-                        <div class="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
+                        <div class="service-link-wrapper">
                             <a href="https://wa.me/529711601042?text=Hola,%20necesito%20reparar%20mi%20celular."
-                                target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">
-                                Reparar mi Celular <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                                target="_blank" rel="noopener noreferrer" class="service-action-link">
+                                Reparar mi Celular <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
                     </article>
 
                     <!-- Ficha 2: Tablets e iPads -->
-                    <article class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:shadow-lg transition-all">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xl">
+                    <article class="service-card">
+                        <div>
+                            <div class="service-icon-box service-icon-indigo">
                                 <i class="fa-solid fa-tablet-screen-button"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Tablets e iPads</h3>
-                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            <h3 class="service-title">Tablets e iPads</h3>
+                            <p class="service-desc">
                                 Sustitución de pantallas completas para iPad, Galaxy Tab, Lenovo entre otras marcas.
                             </p>
-                            <ul class="text-xs text-slate-700 dark:text-slate-300 space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-indigo-600 dark:text-indigo-400 mr-2 text-[10px]"></i>
-                                    Cambio de display/touch
+                            <ul class="service-features-list">
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Cambio de display/touch
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-indigo-600 dark:text-indigo-400 mr-2 text-[10px]"></i>
-                                    Baterías de larga duración
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Baterías de larga duración
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-indigo-600 dark:text-indigo-400 mr-2 text-[10px]"></i>
-                                    Cambio de chasis de aluminio
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Cambio de chasis de aluminio
                                 </li>
                             </ul>
                         </div>
-                        <div class="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
+                        <div class="service-link-wrapper">
                             <a href="https://wa.me/529711601042?text=Hola,%20necesito%20reparar%20mi%20tablet%20o%20iPad."
-                                target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
-                                Reparar mi Tablet <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                                target="_blank" rel="noopener noreferrer" class="service-action-link">
+                                Reparar mi Tablet <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
                     </article>
 
                     <!-- Ficha 3: Laptops -->
-                    <article class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:shadow-lg transition-all">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 rounded-2xl bg-cyan-50 dark:bg-cyan-950/60 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-xl">
+                    <article class="service-card">
+                        <div>
+                            <div class="service-icon-box service-icon-cyan">
                                 <i class="fa-solid fa-laptop"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Laptops</h3>
-                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            <h3 class="service-title">Laptops</h3>
+                            <p class="service-desc">
                                 Mantenimiento térmico profundo, reconstrucción de bisagras vencidas y actualización de almacenamiento para devolverle la velocidad a tu equipo de trabajo.
                             </p>
-                            <ul class="text-xs text-slate-700 dark:text-slate-300 space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-cyan-600 dark:text-cyan-400 mr-2 text-[10px]"></i>
-                                    Pasta térmica Arctic MX-6 / Thermal Pads
+                            <ul class="service-features-list">
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Pasta térmica Arctic MX-6 / Thermal Pads
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-cyan-600 dark:text-cyan-400 mr-2 text-[10px]"></i>
-                                    Reconstrucción o cambio estructural de bisagras
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Reconstrucción o cambio estructural de bisagras
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-cyan-600 dark:text-cyan-400 mr-2 text-[10px]"></i>
-                                    Instalación de discos SSD, NVMe
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Instalación de discos SSD, NVMe
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-cyan-600 dark:text-cyan-400 mr-2 text-[10px]"></i>
-                                    Sustitución de teclados y pantallas
+                                <li>
+                                    <i class="fa-solid fa-check text-blue"></i> Sustitución de teclados y pantallas
                                 </li>
                             </ul>
                         </div>
-                        <div class="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
+                        <div class="service-link-wrapper">
                             <a href="https://wa.me/529711601042?text=Hola,%20necesito%20reparar%20mi%20laptop%20o%20MacBook."
-                                target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center text-xs font-bold text-cyan-600 dark:text-cyan-400 hover:underline">
-                                Reparar mi Laptop <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                                target="_blank" rel="noopener noreferrer" class="service-action-link">
+                                Reparar mi Laptop <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
                     </article>
 
                     <!-- Ficha 4: PCs de Escritorio & Gamer -->
-                    <article class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:shadow-lg transition-all">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl">
+                    <article class="service-card">
+                        <div>
+                            <div class="service-icon-box service-icon-emerald">
                                 <i class="fa-solid fa-desktop"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">PCs de Escritorio & Gamer</h3>
-                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            <h3 class="service-title">PCs de Escritorio & Gamer</h3>
+                            <p class="service-desc">
                                 Diagnóstico, ensamble optimizado con flujo de aire positivo.
                             </p>
-                            <ul class="text-xs text-slate-700 dark:text-slate-300 space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-emerald-600 dark:text-emerald-400 mr-2 text-[10px]"></i>
-                                    Armado de PC/Gamer
+                            <ul class="service-features-list">
+                                <li>
+                                    <i class="fa-solid fa-check text-emerald"></i> Armado de PC/Gamer
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-emerald-600 dark:text-emerald-400 mr-2 text-[10px]"></i>
-                                    Diagnóstico de GPU, RAM y Fuente
+                                <li>
+                                    <i class="fa-solid fa-check text-emerald"></i> Diagnóstico de GPU, RAM y Fuente
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-emerald-600 dark:text-emerald-400 mr-2 text-[10px]"></i>
-                                    Limpieza profunda de gabinetes y fans
+                                <li>
+                                    <i class="fa-solid fa-check text-emerald"></i> Limpieza profunda de gabinetes y fans
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-check text-emerald-600 dark:text-emerald-400 mr-2 text-[10px]"></i>
-                                    Formateo con respaldo íntegro de datos
+                                <li>
+                                    <i class="fa-solid fa-check text-emerald"></i> Formateo con respaldo íntegro de datos
                                 </li>
                             </ul>
                         </div>
-                        <div class="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
+                        <div class="service-link-wrapper">
                             <a href="https://wa.me/529711601042?text=Hola,%20necesito%20mantenimiento%20o%20reparaci%C3%B3n%20para%20mi%20PC."
-                                target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline">
-                                Reparar mi PC <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                                target="_blank" rel="noopener noreferrer" class="service-action-link">
+                                Reparar mi PC <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
                     </article>
@@ -530,34 +477,31 @@
         <!-- =====================================================================
              5. SECCIÓN: CASOS DE ANTES Y DESPUÉS (SLIDER INTERACTIVO)
              ===================================================================== -->
-        <section id="comparativa" class="py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="comparativa" class="comparison-section">
+            <div class="container">
 
-                <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
-                    <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Resultados Reales</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Casos de Antes y Después</h2>
-                    <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+                <div class="section-header">
+                    <span class="section-eyebrow">Resultados Reales</span>
+                    <h2 class="section-title">Casos de Antes y Después</h2>
+                    <p class="section-description">
                         Arrastra el control deslizante para comparar el estado en el que recibimos los equipos frente a la calidad final de entrega.
                     </p>
 
                     <!-- Selector de Casos -->
-                    <div class="flex justify-center gap-2 pt-3 flex-wrap">
-                        <button type="button" data-case="screen"
-                            class="slider-case-btn px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white transition-all shadow-sm">
+                    <div class="case-buttons-group">
+                        <button type="button" data-case="screen" class="slider-case-btn active">
                             📱 Celular: Pantalla Rota
                         </button>
-                        <button type="button" data-case="thermal"
-                            class="slider-case-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all">
+                        <button type="button" data-case="thermal" class="slider-case-btn">
                             💻 PC: Mantenimiento Térmico
                         </button>
-                        <button type="button" data-case="armado"
-                            class="slider-case-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all">
+                        <button type="button" data-case="armado" class="slider-case-btn">
                             💻 Armado de PC
                         </button>
                     </div>
                 </div>
 
-                <div class="max-w-3xl mx-auto space-y-4">
+                <div class="slider-wrapper-box">
                     <!-- Contenedor del Slider -->
                     <div id="comparison-container" class="comparison-slider">
                         <!-- Imagen Después (Fondo) -->
@@ -579,9 +523,9 @@
                     </div>
 
                     <!-- Ficha descriptiva del caso activo -->
-                    <div class="text-center p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                        <h4 id="slider-case-title" class="text-sm font-bold text-slate-900 dark:text-white">Sustitución de Pantalla en Smartphone</h4>
-                        <p id="slider-case-desc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Cristal estrellado sin respuesta táctil vs Instalación de panel OLED nuevo calibrado.</p>
+                    <div class="slider-description-box">
+                        <h4 id="slider-case-title" class="slider-desc-title">Sustitución de Pantalla en Smartphone</h4>
+                        <p id="slider-case-desc" class="slider-desc-text">Cristal estrellado sin respuesta táctil vs Instalación de panel OLED nuevo calibrado.</p>
                     </div>
                 </div>
 
@@ -591,61 +535,61 @@
         <!-- =====================================================================
              6. SECCIÓN: COMPARATIVA FINANCIERA (¿VALE LA PENA REPARAR?)
              ===================================================================== -->
-        <section class="py-20 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section class="decision-section">
+            <div class="container">
 
-                <div class="max-w-4xl mx-auto bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 sm:p-12 shadow-xl">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                        <div class="space-y-4">
-                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">Decisión Inteligente</span>
-                            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+                <div class="decision-card">
+                    <div class="decision-grid">
+                        <div class="decision-text-group">
+                            <span class="section-eyebrow text-emerald">Decisión Inteligente</span>
+                            <h3 class="decision-title">
                                 ¿Comprar un equipo nuevo o reparar el actual?
                             </h3>
-                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            <p class="decision-lead">
                                 En el 85% de las fallas (pantallas rotas, baterías agotadas o discos mecánicos lentos), la reparación técnica cuesta menos de una cuarta parte del valor de un equipo nuevo.
                             </p>
-                            <ul class="text-xs text-slate-700 dark:text-slate-300 space-y-2.5">
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-piggy-bank text-emerald-600 mr-2.5 text-sm"></i>
-                                    <strong>Ahorras hasta un 75%</strong> frente a comprar nuevo.
+                            <ul class="decision-bullets">
+                                <li>
+                                    <i class="fa-solid fa-piggy-bank text-emerald"></i>
+                                    <span><strong>Ahorras hasta un 75%</strong> frente a comprar nuevo.</span>
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-folder-open text-blue-600 mr-2.5 text-sm"></i>
-                                    <strong>Conservas tus fotos y programas</strong> sin reinstalar desde cero.
+                                <li>
+                                    <i class="fa-solid fa-folder-open text-blue"></i>
+                                    <span><strong>Conservas tus fotos y programas</strong> sin reinstalar desde cero.</span>
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fa-solid fa-leaf text-emerald-600 mr-2.5 text-sm"></i>
-                                    <strong>Reduces la basura electrónica</strong> (e-waste) en tu comunidad.
+                                <li>
+                                    <i class="fa-solid fa-leaf text-emerald"></i>
+                                    <span><strong>Reduces la basura electrónica</strong> (e-waste) en tu comunidad.</span>
                                 </li>
                             </ul>
                         </div>
 
-                        <div class="bg-slate-50 dark:bg-slate-800/80 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 space-y-5">
-                            <div class="space-y-1">
-                                <div class="flex justify-between text-xs font-bold">
-                                    <span class="text-slate-600 dark:text-slate-300">Costo de Equipo Nuevo:</span>
-                                    <span class="text-rose-600 dark:text-rose-400">$8,000 - $22,000 MXN</span>
+                        <div class="comparison-box">
+                            <div class="comparison-row">
+                                <div class="comparison-labels">
+                                    <span>Costo de Equipo Nuevo:</span>
+                                    <span class="label-cost-new">$8,000 - $22,000 MXN</span>
                                 </div>
-                                <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                    <div class="bg-rose-500 h-full w-full"></div>
-                                </div>
-                            </div>
-
-                            <div class="space-y-1">
-                                <div class="flex justify-between text-xs font-bold">
-                                    <span class="text-slate-600 dark:text-slate-300">Reparación:</span>
-                                    <span class="text-emerald-600 dark:text-emerald-400">$650 - $2,200 MXN</span>
-                                </div>
-                                <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                    <div class="bg-emerald-500 h-full w-[22%]"></div>
+                                <div class="progress-track">
+                                    <div class="progress-bar-rose"></div>
                                 </div>
                             </div>
 
-                            <div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-center">
-                                <p class="text-xs font-extrabold text-emerald-800 dark:text-emerald-300">
+                            <div class="comparison-row">
+                                <div class="comparison-labels">
+                                    <span>Reparación:</span>
+                                    <span class="label-cost-repair">$650 - $2,200 MXN</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar-emerald"></div>
+                                </div>
+                            </div>
+
+                            <div class="savings-callout">
+                                <p class="savings-title">
                                     ¡Tu bolsillo te lo agradecerá!
                                 </p>
-                                <p class="text-[11px] text-emerald-700 dark:text-emerald-400 mt-0.5">
+                                <p class="savings-desc">
                                     Trae tu equipo a revisión hoy y te diremos con honestidad si es costeable.
                                 </p>
                             </div>
@@ -659,63 +603,59 @@
         <!-- =====================================================================
              7. SECCIÓN: PREGUNTAS FRECUENTES (FAQ ACCESIBLE)
              ===================================================================== -->
-        <section id="faq" class="py-20 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="faq" class="faq-section">
+            <div class="container">
 
-                <div class="text-center mb-12 space-y-3">
-                    <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Dudas Frecuentes</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Preguntas Frecuentes</h2>
-                    <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+                <div class="section-header">
+                    <span class="section-eyebrow">Dudas Frecuentes</span>
+                    <h2 class="section-title">Preguntas Frecuentes</h2>
+                    <p class="section-description">
                         Respuestas directas a las preguntas que más nos hacen nuestros clientes.
                     </p>
                 </div>
 
-                <div class="space-y-4">
+                <div class="faq-list">
 
                     <!-- Pregunta 1 -->
-                    <div class="faq-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                        <button type="button" aria-expanded="false"
-                            class="faq-toggle-btn w-full p-5 text-left flex items-center justify-between font-bold text-sm text-slate-900 dark:text-white focus:outline-none">
+                    <div class="faq-item">
+                        <button type="button" aria-expanded="false" class="faq-toggle-btn">
                             <span>¿Se borran mis fotos, conversaciones y archivos durante la reparación?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon text-xs text-slate-400 transition-transform"></i>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
                         </button>
-                        <div class="faq-content px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-3">
+                        <div class="faq-content">
                             En reparaciones de hardware como pantallas, baterías, conectores de carga, teclados o bisagras, <strong>tu información permanece intacta</strong>. No tocamos tu almacenamiento. En intervenciones complejas de sistema o formateo, siempre te consultamos antes de proceder y realizamos un respaldo previo.
                         </div>
                     </div>
 
                     <!-- Pregunta 2 -->
-                    <div class="faq-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                        <button type="button" aria-expanded="false"
-                            class="faq-toggle-btn w-full p-5 text-left flex items-center justify-between font-bold text-sm text-slate-900 dark:text-white focus:outline-none">
+                    <div class="faq-item">
+                        <button type="button" aria-expanded="false" class="faq-toggle-btn">
                             <span>¿Cobran por revisar mi equipo si decido no repararlo?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon text-xs text-slate-400 transition-transform"></i>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
                         </button>
-                        <div class="faq-content px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-3">
+                        <div class="faq-content">
                             <strong>El diagnóstico inicial en mostrador es gratuito.</strong> Te explicamos la falla y te damos un presupuesto exacto. Si decides no aceptarlo, recoges tu equipo tal como lo dejaste sin costo alguno.
                         </div>
                     </div>
 
                     <!-- Pregunta 3 -->
-                    <div class="faq-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                        <button type="button" aria-expanded="false"
-                            class="faq-toggle-btn w-full p-5 text-left flex items-center justify-between font-bold text-sm text-slate-900 dark:text-white focus:outline-none">
+                    <div class="faq-item">
+                        <button type="button" aria-expanded="false" class="faq-toggle-btn">
                             <span>¿Cuánto tiempo tardan en cambiar una pantalla o batería?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon text-xs text-slate-400 transition-transform"></i>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
                         </button>
-                        <div class="faq-content px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-3">
+                        <div class="faq-content">
                             Para los modelos más habituales (iPhone, Samsung Galaxy, Xiaomi, Motorola), el cambio de pantalla o batería se realiza el mismo día que llega la refacción (Nota: todas las refacciones, incluidos los displays/touch se hacen bajo pedido). Cuando el equipo ya está listo, <strong>te avisamos para que pases a recogerlo</strong>.
                         </div>
                     </div>
 
                     <!-- Pregunta 4 -->
-                    <div class="faq-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                        <button type="button" aria-expanded="false"
-                            class="faq-toggle-btn w-full p-5 text-left flex items-center justify-between font-bold text-sm text-slate-900 dark:text-white focus:outline-none">
+                    <div class="faq-item">
+                        <button type="button" aria-expanded="false" class="faq-toggle-btn">
                             <span>¿Qué formas de pago aceptan?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon text-xs text-slate-400 transition-transform"></i>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
                         </button>
-                        <div class="faq-content px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-3">
+                        <div class="faq-content">
                             Aceptamos pagos en efectivo y transferencias bancarias electrónicas (SPEI). Emitimos comprobante de servicio con el detalle de la intervención realizada.
                         </div>
                     </div>
@@ -728,87 +668,86 @@
         <!-- =====================================================================
              8. SECCIÓN: UBICACIÓN, HORARIOS Y CONTACTO DIRECTO
              ===================================================================== -->
-        <section id="contacto" class="py-20 bg-white dark:bg-slate-900">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="contacto" class="contact-section">
+            <div class="container">
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="contact-grid">
 
                     <!-- Columna de Información de Contacto -->
-                    <div class="lg:col-span-5 space-y-6">
-                        <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Atención en Mostrador</span>
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
-                            Visítanos o Escríbenos Directamente
-                        </h2>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                            Estamos listos para recibir tu equipo, evaluar la falla y brindarte una solución honesta y duradera.
-                        </p>
+                    <div class="contact-info-col">
+                        <div>
+                            <span class="section-eyebrow">Atención en Mostrador</span>
+                            <h2 class="section-title">
+                                Visítanos o Escríbenos Directamente
+                            </h2>
+                            <p class="section-description">
+                                Estamos listos para recibir tu equipo, evaluar la falla y brindarte una solución honesta y duradera.
+                            </p>
+                        </div>
 
-                        <div class="space-y-4 pt-2">
+                        <div class="contact-cards-group">
                             <!-- Ubicación -->
-                            <div class="flex items-start space-x-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-                                <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                            <div class="contact-info-card">
+                                <div class="contact-icon-box service-icon-blue">
                                     <i class="fa-solid fa-location-dot"></i>
                                 </div>
-                                <div class="text-xs">
-                                    <p class="font-bold text-slate-900 dark:text-white text-sm">Ubicación de Laboratorio</p>
-                                    <p class="text-slate-600 dark:text-slate-300 mt-0.5">Calle Tlaxcala, Col. Conasupo, San Blas Atempa, Oax.</p>
-                                    <p class="text-slate-400 mt-0.5">Fácil acceso y estacionamiento cercano.</p>
+                                <div class="contact-details">
+                                    <p class="contact-card-title">Ubicación de Laboratorio</p>
+                                    <p class="contact-card-text">Calle Tlaxcala, Col. Conasupo, San Blas Atempa, Oax.</p>
+                                    <p class="contact-card-note">Fácil acceso y estacionamiento cercano.</p>
                                 </div>
                             </div>
 
                             <!-- WhatsApp y Teléfono -->
-                            <div class="flex items-start space-x-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-                                <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <div class="contact-info-card">
+                                <div class="contact-icon-box service-icon-emerald">
+                                    <i class="fa-brands fa-whatsapp" style="font-size: 1.125rem;"></i>
                                 </div>
-                                <div class="text-xs">
-                                    <p class="font-bold text-slate-900 dark:text-white text-sm">WhatsApp y Teléfono</p>
-                                    <p class="text-slate-600 dark:text-slate-300 mt-0.5 font-mono font-bold text-sm">+52 971 160 1042</p>
-                                    <p class="text-slate-400 mt-0.5">Atención en línea de lunes a domingo.</p>
+                                <div class="contact-details">
+                                    <p class="contact-card-title">WhatsApp y Teléfono</p>
+                                    <p class="contact-card-phone">+52 971 160 1042</p>
+                                    <p class="contact-card-note">Atención en línea de lunes a domingo.</p>
                                 </div>
                             </div>
 
                             <!-- Horarios -->
-                            <div class="flex items-start space-x-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-                                <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                            <div class="contact-info-card">
+                                <div class="contact-icon-box" style="background-color: var(--brand-amber-light); color: var(--brand-amber);">
                                     <i class="fa-solid fa-clock"></i>
                                 </div>
-                                <div class="text-xs">
-                                    <p class="font-bold text-slate-900 dark:text-white text-sm">Horario de Mostrador</p>
-                                    <p class="text-slate-600 dark:text-slate-300 mt-0.5"><strong>Lunes a Sábado:</strong> 9:00 AM - 8:00 PM</p>
-                                    <p class="text-slate-600 dark:text-slate-300"><strong>Domingos:</strong> 11:00 AM - 6:00 PM</p>
-                                    <p id="contact-status-note" class="text-emerald-600 dark:text-emerald-400 font-semibold mt-1">● Actualmente Disponible</p>
+                                <div class="contact-details">
+                                    <p class="contact-card-title">Horario de Mostrador</p>
+                                    <p class="contact-card-text"><strong>Lunes a Sábado:</strong> 9:00 AM - 8:00 PM</p>
+                                    <p class="contact-card-text"><strong>Domingos:</strong> 11:00 AM - 6:00 PM</p>
+                                    <p id="contact-status-note" class="contact-card-text" style="color: var(--brand-emerald); font-weight: 600; margin-top: 0.25rem;">● Actualmente Disponible</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Columna de Formulario de Mensaje Directo -->
-                    <div class="lg:col-span-7 bg-slate-50 dark:bg-slate-850 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Envíanos un Mensaje</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">
+                    <div class="contact-form-card">
+                        <h3 class="contact-form-title">Envíanos un Mensaje</h3>
+                        <p class="contact-form-subtitle">
                             Completa los datos y se redactará una solicitud directa a nuestro canal de WhatsApp para atenderte de inmediato.
                         </p>
 
-                        <form id="contact-form" class="space-y-4">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="contact-name" class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1.5">Nombre Completo</label>
-                                    <input type="text" id="contact-name" required placeholder="Ej. Juan Pérez"
-                                        class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <form id="contact-form" style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div class="form-grid-2">
+                                <div class="form-field">
+                                    <label for="contact-name" class="quote-step-title" style="margin-bottom: 0.25rem;">Nombre Completo</label>
+                                    <input type="text" id="contact-name" required placeholder="Ej. Juan Pérez" class="form-input">
                                 </div>
-                                <div>
-                                    <label for="contact-phone" class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1.5">Teléfono / WhatsApp</label>
-                                    <input type="tel" id="contact-phone" required placeholder="Ej. 971 123 4567"
-                                        class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <div class="form-field">
+                                    <label for="contact-phone" class="quote-step-title" style="margin-bottom: 0.25rem;">Teléfono / WhatsApp</label>
+                                    <input type="tel" id="contact-phone" required placeholder="Ej. 971 123 4567" class="form-input">
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="contact-device" class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1.5">Tipo de Dispositivo</label>
-                                    <select id="contact-device"
-                                        class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <div class="form-grid-2">
+                                <div class="form-field">
+                                    <label for="contact-device" class="quote-step-title" style="margin-bottom: 0.25rem;">Tipo de Dispositivo</label>
+                                    <select id="contact-device" class="form-select">
                                         <option value="Celular / Smartphone">Celular / Smartphone</option>
                                         <option value="Tablet / iPad">Tablet / iPad</option>
                                         <option value="Laptop / MacBook">Laptop</option>
@@ -816,40 +755,35 @@
                                         <option value="Otro equipo electrónico">Otro equipo electrónico</option>
                                     </select>
                                 </div>
-                                <div>
-                                    <label for="contact-model" class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1.5">Marca y Modelo (Opcional)</label>
-                                    <input type="text" id="contact-model" placeholder="Ej. iPhone 14, Dell G15..."
-                                        class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <div class="form-field">
+                                    <label for="contact-model" class="quote-step-title" style="margin-bottom: 0.25rem;">Marca y Modelo (Opcional)</label>
+                                    <input type="text" id="contact-model" placeholder="Ej. iPhone 14, Dell G15..." class="form-input">
                                 </div>
                             </div>
 
-                            <div>
-                                <label for="contact-message" class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-400 mb-1.5">Describe la Falla</label>
+                            <div class="form-field">
+                                <label for="contact-message" class="quote-step-title" style="margin-bottom: 0.25rem;">Describe la Falla</label>
                                 <textarea id="contact-message" rows="3" required
                                     placeholder="¿Qué le ocurre a tu equipo? (Se cayó al agua, no prende, se calienta, pantalla rota...)"
-                                    class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                                    class="form-textarea"></textarea>
                             </div>
 
-                            <div class="flex items-start space-x-2 pt-1">
-                                <input type="checkbox" id="contact-consent" required class="mt-1 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
-                                <label for="contact-consent" class="text-xs text-slate-500 dark:text-slate-400 leading-normal">
-                                    Acepto el <button type="button" onclick="openModal('privacy-modal')"
-                                        class="text-blue-600 dark:text-blue-400 underline p-0 bg-transparent border-none cursor-pointer">Aviso de Privacidad</button> y los <button type="button"
-                                        onclick="openModal('terms-modal')"
-                                        class="text-blue-600 dark:text-blue-400 underline p-0 bg-transparent border-none cursor-pointer">Términos de Servicio</button>.
+                            <div class="consent-row">
+                                <input type="checkbox" id="contact-consent" required class="consent-checkbox">
+                                <label for="contact-consent" class="consent-label">
+                                    Acepto el <button type="button" onclick="openModal('privacy-modal')" class="consent-link-btn">Aviso de Privacidad</button> y los <button type="button"
+                                        onclick="openModal('terms-modal')" class="consent-link-btn">Términos de Servicio</button>.
                                 </label>
                             </div>
 
-                            <button type="submit"
-                                class="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center">
+                            <button type="submit" class="btn-submit-contact">
                                 <span>Enviar Consulta Técnica</span>
-                                <i class="fa-solid fa-paper-plane ml-2 text-xs"></i>
+                                <i class="fa-solid fa-paper-plane" style="font-size: 0.75rem;"></i>
                             </button>
                         </form>
 
-                        <div id="contact-feedback"
-                            class="hidden mt-4 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs text-center font-medium">
-                            <i class="fa-solid fa-circle-check mr-1.5"></i> Abriendo tu WhatsApp con el mensaje pre-cargado...
+                        <div id="contact-feedback" class="contact-feedback-box hidden">
+                            <i class="fa-solid fa-circle-check" style="margin-right: 0.375rem;"></i> Abriendo tu WhatsApp con el mensaje pre-cargado...
                         </div>
                     </div>
 
@@ -862,41 +796,37 @@
     <!-- =====================================================================
          9. PIE DE PÁGINA (FOOTER)
          ===================================================================== -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-800">
-                <div class="flex items-center space-x-3">
-                    <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white">
-                        <i class="fa-solid fa-microchip text-base"></i>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <div class="footer-logo-badge">
+                        <i class="fa-solid fa-microchip"></i>
                     </div>
                     <div>
-                        <span class="text-lg font-extrabold text-white">Tech<span class="text-blue-500">Fix</span></span>
-                        <p class="text-[11px] text-slate-500">Servicio Técnico</p>
+                        <span class="footer-logo-text">Tech<span class="footer-logo-accent">Fix</span></span>
+                        <p class="footer-logo-sub">Servicio Técnico</p>
                     </div>
                 </div>
 
-                <div class="flex flex-wrap justify-center gap-4 text-xs text-slate-400">
-                    <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
-                    <a href="#cotizador" class="hover:text-white transition-colors">Cotizador</a>
-                    <button type="button" onclick="openModal('privacy-modal')"
-                        class="hover:text-white transition-colors underline bg-transparent border-none cursor-pointer">Aviso de Privacidad</button>
-                    <button type="button" onclick="openModal('terms-modal')"
-                        class="hover:text-white transition-colors underline bg-transparent border-none cursor-pointer">Términos de Servicio</button>
+                <div class="footer-nav-links">
+                    <a href="#servicios">Servicios</a>
+                    <a href="#cotizador">Cotizador</a>
+                    <button type="button" onclick="openModal('privacy-modal')" class="footer-modal-link">Aviso de Privacidad</button>
+                    <button type="button" onclick="openModal('terms-modal')" class="footer-modal-link">Términos de Servicio</button>
                 </div>
 
-                <div class="flex items-center space-x-3">
-                    <a href="https://wa.me/529711601042" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
-                        class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-emerald-600 hover:text-white flex items-center justify-center text-slate-300 transition-colors">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                <div class="footer-social-icons">
+                    <a href="https://wa.me/529711601042" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="footer-icon-btn whatsapp">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.125rem;"></i>
                     </a>
-                    <a href="tel:529711601042" aria-label="Llamar por teléfono"
-                        class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-blue-600 hover:text-white flex items-center justify-center text-slate-300 transition-colors">
-                        <i class="fa-solid fa-phone text-sm"></i>
+                    <a href="tel:529711601042" aria-label="Llamar por teléfono" class="footer-icon-btn">
+                        <i class="fa-solid fa-phone" style="font-size: 0.875rem;"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-3 text-center sm:text-left">
+            <div class="footer-bottom">
                 <p>© 2026 TechFix. Todos los derechos reservados. No afiliados comercialmente con Apple Inc., Samsung Electronics o Microsoft.</p>
                 <p>Reparaciones con piezas de calidad comprobada.</p>
             </div>
@@ -906,49 +836,43 @@
     <!-- =====================================================================
          10. BARRA FLOTANTE DE ACCIÓN RÁPIDA (SOLO MÓVIL)
          ===================================================================== -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 p-2.5 px-4 flex items-center justify-between gap-3 shadow-2xl">
-        <a href="tel:529711601042"
-            class="flex-1 py-3 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-bold text-xs flex items-center justify-center transition-colors">
-            <i class="fa-solid fa-phone text-blue-600 dark:text-blue-400 mr-2"></i> Llamar
+    <div class="mobile-bottom-bar">
+        <a href="tel:529711601042" class="mobile-bar-btn mobile-bar-call">
+            <i class="fa-solid fa-phone"></i> Llamar
         </a>
-        <a href="#cotizador"
-            class="flex-1 py-3 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center justify-center transition-colors shadow-sm">
-            <i class="fa-solid fa-calculator mr-2"></i> Cotizar
+        <a href="#cotizador" class="mobile-bar-btn mobile-bar-quote">
+            <i class="fa-solid fa-calculator"></i> Cotizar
         </a>
-        <a href="https://wa.me/529711601042?text=Hola,%20solicito%20atenci%C3%B3n%20para%20un%20equipo." target="_blank" rel="noopener noreferrer"
-            class="flex-1 py-3 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center transition-colors shadow-sm">
-            <i class="fa-brands fa-whatsapp text-sm mr-2"></i> WhatsApp
+        <a href="https://wa.me/529711601042?text=Hola,%20solicito%20atenci%C3%B3n%20para%20un%20equipo." target="_blank" rel="noopener noreferrer" class="mobile-bar-btn mobile-bar-wa">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
         </a>
     </div>
 
     <!-- =====================================================================
          11. MODAL: AVISO DE PRIVACIDAD
          ===================================================================== -->
-    <div id="privacy-modal" data-modal aria-hidden="true"
-        class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 space-y-4 border border-slate-200 dark:border-slate-800 shadow-2xl relative">
-            <button type="button" onclick="closeModal('privacy-modal')" aria-label="Cerrar modal"
-                class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl font-bold p-1">
+    <div id="privacy-modal" data-modal aria-hidden="true" class="modal-overlay hidden">
+        <div class="modal-dialog">
+            <button type="button" onclick="closeModal('privacy-modal')" aria-label="Cerrar modal" class="modal-close-btn">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Aviso de Privacidad Integral</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">De conformidad con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).</p>
-            <hr class="border-slate-100 dark:border-slate-800">
-            <div class="space-y-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                <h4 class="font-bold text-slate-900 dark:text-white text-sm">1. Responsable del Tratamiento</h4>
+            <h3 class="modal-title">Aviso de Privacidad Integral</h3>
+            <p class="modal-subtitle">De conformidad con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).</p>
+            <hr class="modal-divider">
+            <div class="modal-content-body">
+                <h4 class="modal-section-title">1. Responsable del Tratamiento</h4>
                 <p>TechFix es responsable de recabar, tratar y salvaguardar sus datos de contacto y la información técnica del equipo entregado a diagnóstico o reparación.</p>
 
-                <h4 class="font-bold text-slate-900 dark:text-white text-sm">2. Estricta Confidencialidad de Archivos Digitales</h4>
-                <p class="bg-blue-50 dark:bg-blue-950/40 p-3.5 rounded-xl border border-blue-100 dark:border-blue-900 text-slate-800 dark:text-slate-200">
+                <h4 class="modal-section-title">2. Estricta Confidencialidad de Archivos Digitales</h4>
+                <p class="modal-callout-box">
                     <strong>Compromiso ético:</strong> Nuestros técnicos tienen terminantemente prohibido revisar, copiar, transferir o visualizar fotos, videos, documentos, mensajes o correos electrónicos almacenados en el dispositivo. Cualquier prueba se limita a comprobar el funcionamiento del hardware (pantalla táctil, bocinas, micrófonos y cámaras frente a carta de prueba).
                 </p>
 
-                <h4 class="font-bold text-slate-900 dark:text-white text-sm">3. Derechos ARCO</h4>
+                <h4 class="modal-section-title">3. Derechos ARCO</h4>
                 <p>Usted puede ejercer sus derechos de Acceso, Rectificación, Cancelación u Oposición solicitándolo directamente vía WhatsApp al número +52 971 160 1042.</p>
             </div>
-            <div class="pt-4 text-right">
-                <button type="button" onclick="closeModal('privacy-modal')"
-                    class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl transition-all">
+            <div class="modal-footer">
+                <button type="button" onclick="closeModal('privacy-modal')" class="btn btn-primary" style="padding: 0.625rem 1.25rem; font-size: 0.75rem;">
                     Entendido y Cerrar
                 </button>
             </div>
@@ -958,32 +882,29 @@
     <!-- =====================================================================
          12. MODAL: TÉRMINOS Y CONDICIONES DE SERVICIO
          ===================================================================== -->
-    <div id="terms-modal" data-modal aria-hidden="true"
-        class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 space-y-4 border border-slate-200 dark:border-slate-800 shadow-2xl relative">
-            <button type="button" onclick="closeModal('terms-modal')" aria-label="Cerrar modal"
-                class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl font-bold p-1">
+    <div id="terms-modal" data-modal aria-hidden="true" class="modal-overlay hidden">
+        <div class="modal-dialog">
+            <button type="button" onclick="closeModal('terms-modal')" aria-label="Cerrar modal" class="modal-close-btn">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Términos y Condiciones de Servicio</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Condiciones aplicables al diagnóstico, reparación física y resguardo de equipos.</p>
-            <hr class="border-slate-100 dark:border-slate-800">
-            <div class="space-y-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                <h4 class="font-bold text-slate-900 dark:text-white text-sm">1. Diagnóstico y Presupuesto</h4>
+            <h3 class="modal-title">Términos y Condiciones de Servicio</h3>
+            <p class="modal-subtitle">Condiciones aplicables al diagnóstico, reparación física y resguardo de equipos.</p>
+            <hr class="modal-divider">
+            <div class="modal-content-body">
+                <h4 class="modal-section-title">1. Diagnóstico y Presupuesto</h4>
                 <p>El diagnóstico en mostrador no tiene costo. La reparación se inicia únicamente con la autorización expresa del cliente tras conocer el presupuesto final.</p>
 
-                <h4 class="font-bold text-slate-900 dark:text-white text-sm">2. Cobertura de Garantía</h4>
+                <h4 class="modal-section-title">2. Cobertura de Garantía</h4>
                 <p>Todas las refacciones instaladas son nuevas de la calidad solicitada por el cliente durante la cotización, la garantía solo aplica a la pieza antes de instalarse, si llega defectuoso, el técnico se encargara de hacer el cambio de refacción sin costo adicional, una vez instalada la pieza funcionando, se le entrega al cliente para su revisión, con eso finaliza la garantía de la reparación.</p>
 
-                <h4 class="font-bold text-slate-900 dark:text-white text-sm">3. Resguardo de Información</h4>
+                <h4 class="modal-section-title">3. Resguardo de Información</h4>
                 <p>Recomendamos a todo cliente respaldar sus archivos antes de cualquier servicio de software o intervención en placa lógica.</p>
 
-                <h4 class="font-bold text-slate-900 dark:text-white text-sm">4. Plazo de Retiro de Equipos</h4>
+                <h4 class="modal-section-title">4. Plazo de Retiro de Equipos</h4>
                 <p>El cliente cuenta con un plazo de 20 días naturales tras la notificación de equipo listo para retirarlo de nuestras instalaciones.</p>
             </div>
-            <div class="pt-4 text-right">
-                <button type="button" onclick="closeModal('terms-modal')"
-                    class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl transition-all">
+            <div class="modal-footer">
+                <button type="button" onclick="closeModal('terms-modal')" class="btn btn-primary" style="padding: 0.625rem 1.25rem; font-size: 0.75rem;">
                     Aceptar y Cerrar
                 </button>
             </div>
