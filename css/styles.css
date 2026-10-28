@@ -741,10 +741,19 @@ html.dark .hero-section {
     border: 1px solid var(--brand-emerald-border);
 }
 
+.status-badge-pill.status-open .status-indicator-dot {
+    background-color: var(--brand-emerald);
+    animation: status-pulse 2s infinite ease-in-out;
+}
+
 .status-badge-pill.status-closed {
     background-color: var(--brand-amber-light);
     color: var(--brand-amber);
     border: 1px solid var(--brand-amber-border);
+}
+
+.status-badge-pill.status-closed .status-indicator-dot {
+    background-color: var(--brand-amber);
 }
 
 .workshop-services-list {

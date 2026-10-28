@@ -6,23 +6,19 @@ Sitio web moderno, de alto rendimiento y enfocado a conversión para un taller o
 
 ## 🚀 Características Principales
 
-1. **Estado de Atención Dinámico en Tiempo Real (Disponible / Fuera de servicio)**:
-   - Detecta automáticamente la hora y día actual del cliente:
-     - **Lunes a Sábado (9:00 AM a 8:00 PM):** Muestra el indicador activo en verde con la leyenda **"Disponible"**.
-     - **Domingos (11:00 AM a 6:00 PM):** Muestra **"Disponible"**.
-     - **Fuera de estos horarios:** Cambia automáticamente a **"Fuera de servicio"** en la barra superior, la tarjeta del taller y la sección de contacto.
+1. **Estado de Atención Dinámico en Tiempo Real (En Línea / Mostrador)**:
+   - **Barra superior / Encabezado:** Muestra permanentemente **"Disponible en línea"** para atención digital y WhatsApp.
+   - **Estado del Mostrador (Taller presencial):**
+     - **Lunes a Sábado (9:00 AM a 4:00 PM):** Muestra **"Disponible"** en verde.
+     - **Domingos (11:00 AM a 4:00 PM):** Muestra **"Disponible"** en verde.
+     - **Fuera de estos horarios:** Cambia automáticamente a **"No disponible"** en la tarjeta de Estado del Mostrador y en la sección de contacto.
 
 2. **Cotizador Express Interactivo**:
    - Selección por tipo de equipo: Celulares, Tablets, Laptops y PCs Gamer/Oficina.
    - Cálculo en tiempo real de tiempo de entrega estimado, rango de precio referencial y especificaciones del servicio.
    - Botón directo para enviar la cotización pre-redactada a WhatsApp con 1 solo clic.
 
-3. **Rastreador de Reparaciones en Vivo (Order Tracker)**:
-   - Los clientes pueden ingresar su número de orden o ticket (ej. `FIX-1042`, `FIX-1088`, `FIX-1120`).
-   - Línea de tiempo visual interactiva de 5 etapas: Recepción ➔ Diagnóstico ➔ Laboratorio ➔ Control de Calidad ➔ Listo para Retiro.
-   - Visualización de pruebas técnicas superadas y técnico asignado.
-
-4. **Catálogo de Servicios Técnico Especializado**:
+3. **Catálogo de Servicios Técnico Especializado**:
    - 📱 **Celulares**: Pantallas OLED/AMOLED con True Tone, baterías al 100% de salud, pin de carga y tapas traseras.
    - 📟 **Tablets e iPads**: Digitalizadores táctiles, displays laminados, conectores flex y enderezado de chasis.
    - 💻 **Laptops y MacBooks**: Mantenimiento térmico con pasta Arctic MX-4, reparación estructural de bisagras rotas, actualización a SSD NVMe y teclados.
@@ -30,17 +26,17 @@ Sitio web moderno, de alto rendimiento y enfocado a conversión para un taller o
    - 🔬 **Microsoldadura y Placa Madre**: Cámara térmica infrarroja y microscopio para cortocircuitos.
    - 💾 **Recuperación de Archivos**: Rescate de discos dañados y migración de sistema operativo.
 
-5. **Comparador Interactivo Antes / Después**:
+4. **Comparador Interactivo Antes / Después**:
    - Slider táctil y deslizable para contrastar el estado de llegada vs. equipo terminado.
 
-6. **Modo Claro / Modo Oscuro (Light & Dark Mode)**:
+5. **Modo Claro / Modo Oscuro (Light & Dark Mode)**:
    - Selector en la barra de navegación con persistencia en `localStorage`.
 
-7. **Diseño Mobile-First y Accesible**:
+6. **Diseño Mobile-First y Accesible**:
    - Barra flotante inferior fija para móviles con botones táctiles grandes (≥48px): Llamar, Cotizar, WhatsApp.
    - Contraste visual verificado WCAG AA y navegación por teclado accesible.
 
-8. **Aviso de Privacidad y Términos de Servicio Integrados**:
+7. **Aviso de Privacidad y Términos de Servicio Integrados**:
    - Modales emergentes que garantizan la estricta confidencialidad de fotos y archivos personales conforme a normativas de protección de datos.
 
 ---

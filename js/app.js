@@ -1,6 +1,6 @@
 /**
  * TechFix - Lógica de Interacción y Cotizador Express
- * Módulos: Cotizador inteligente, Rastreador de órdenes, Slider Antes/Después, Modo oscuro, Horario de atención y Accesibilidad.
+ * Módulos: Cotizador inteligente, Slider Antes/Después, Modo oscuro, Horario de atención y Accesibilidad.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initBusinessHoursStatus();
     initMobileMenu();
     initQuoteCalculator();
-    initOrderTracker();
     initComparisonSlider();
     initFaqAccordion();
     initModals();
@@ -255,202 +254,7 @@ function sendQuoteToWhatsApp() {
 }
 
 /* ==========================================================================
-   4. Rastreador de Órdenes en Vivo (Demo funcional y buscador de tickets)
-   ========================================================================== */
-const orderDatabase = {
-    'FIX-1042': {
-        ticket: 'FIX-1042',
-        device: 'iPhone 14 Pro 128GB',
-        service: 'Cambio de pantalla OLED original con restauración True Tone',
-        technician: 'Ing. Alejandro Morales',
-        receivedAt: 'Hoy, 10:15 AM',
-        step: 5, // 1: Recepción, 2: Diagnóstico, 3: Laboratorio, 4: Calidad, 5: Listo
-        statusBadge: 'Listo para Entrega',
-        statusColor: 'emerald',
-        notes: 'Pruebas táctiles y Face ID superadas con éxito. Equipo empaquetado en espera del cliente.'
-    },
-    'FIX-1088': {
-        ticket: 'FIX-1088',
-        device: 'Laptop Lenovo Legion 5 (Ryzen 7 + RTX 3060)',
-        service: 'Mantenimiento térmico profundo y reemplazo de pasta térmica Arctic MX-4',
-        technician: 'Téc. Roberto Méndez',
-        receivedAt: 'Ayer, 4:30 PM',
-        step: 4,
-        statusBadge: 'En Control de Calidad',
-        statusColor: 'blue',
-        notes: 'Equipo en prueba de estrés (AIDA64 + FurMark). Temperaturas estables en 68°C bajo carga máxima.'
-    },
-    'FIX-1120': {
-        ticket: 'FIX-1120',
-        device: 'PC Gamer Asus TUF / Placa B550',
-        service: 'Reparación de etapa de potencia VRM y cortocircuito en línea de 12V',
-        technician: 'Ing. Daniel Ruiz (Microsoldadura)',
-        receivedAt: 'Hoy, 9:20 AM',
-        step: 3,
-        statusBadge: 'En Reparación de Laboratorio',
-        statusColor: 'amber',
-        notes: 'Mosfet dañado reemplazado bajo microscopio. Verificando voltajes de estabilización.'
-    }
-};
-
-function initOrderTracker() {
-    const searchBtn = document.getElementById('search-order-btn');
-    const orderInput = document.getElementById('order-input');
-    const quickTags = document.querySelectorAll('.order-quick-tag');
-
-    if (!searchBtn || !orderInput) return;
-
-    searchBtn.addEventListener('click', () => {
-        const query = orderInput.value.trim().toUpperCase();
-        if (query) renderOrderResult(query);
-    });
-
-    orderInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            const query = orderInput.value.trim().toUpperCase();
-            if (query) renderOrderResult(query);
-        }
-    });
-
-    quickTags.forEach(tag => {
-        tag.addEventListener('click', () => {
-            const code = tag.dataset.order;
-            orderInput.value = code;
-            renderOrderResult(code);
-        });
-    });
-
-    // Renderizar una orden por defecto para que el usuario vea la herramienta activa
-    renderOrderResult('FIX-1042');
-}
-
-/**
- * Utilidad de escape contra DOM XSS para cadenas no confiables
- */
-function escapeHTML(str) {
-    if (str === null || str === undefined) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-}
-
-function renderOrderResult(ticketCode) {
-    const resultContainer = document.getElementById('order-result');
-    if (!resultContainer) return;
-
-    // Sanitización y lista blanca estricta (solo A-Z, 0-9 y guiones, máx 15 caracteres)
-    const rawCode = (ticketCode || '').toString().trim().toUpperCase();
-    const cleanCode = rawCode.replace(/[^A-Z0-9-]/g, '').slice(0, 15);
-
-    if (!cleanCode) {
-        resultContainer.innerHTML = `
-            <div class="bg-amber-50 dark:bg-amber-950/40 rounded-2xl border border-amber-200 dark:border-amber-800 p-6 text-center">
-                <i class="fa-solid fa-triangle-exclamation text-amber-500 text-2xl mb-2"></i>
-                <p class="text-sm font-semibold text-slate-900 dark:text-white">Folio no válido</p>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Ingresa un formato de orden técnico correcto (ej. FIX-1042).</p>
-            </div>
-        `;
-        return;
-    }
-
-    const order = orderDatabase[cleanCode] || {
-        ticket: cleanCode,
-        device: 'Equipo en recepción técnica',
-        service: 'Diagnóstico general de componentes y verificación de fallas',
-        technician: 'Mesa de Diagnóstico Técnico',
-        receivedAt: 'En turno del día',
-        step: 2, // 1: Recepción, 2: Diagnóstico, 3: Laboratorio, 4: Calidad, 5: Listo
-        statusBadge: 'En Proceso de Diagnóstico',
-        statusColor: 'blue',
-        notes: 'El equipo se encuentra en el banco de pruebas. Recibirás una notificación por WhatsApp cuando el presupuesto exacto esté listo.'
-    };
-
-    const steps = [
-        { num: 1, title: 'Recepción', desc: 'Registro y estado físico' },
-        { num: 2, title: 'Diagnóstico', desc: 'Pruebas de componentes' },
-        { num: 3, title: 'Laboratorio', desc: 'Mano de obra y refacción' },
-        { num: 4, title: 'Control de Calidad', desc: 'Verificación de funciones' },
-        { num: 5, title: 'Listo para Retiro', desc: 'Con garantía por escrito' }
-    ];
-
-    let stepsHtml = '';
-    steps.forEach((s) => {
-        const isDone = s.num < order.step;
-        const isCurrent = s.num === order.step;
-
-        let iconBg = 'bg-slate-200 dark:bg-slate-700 text-slate-500';
-        let stepText = 'text-slate-500 dark:text-slate-400';
-
-        if (isDone) {
-            iconBg = 'bg-emerald-600 text-white shadow-sm';
-            stepText = 'text-emerald-700 dark:text-emerald-400 font-semibold';
-        } else if (isCurrent) {
-            iconBg = 'bg-blue-600 text-white ring-4 ring-blue-100 dark:ring-blue-900/50 shadow-md';
-            stepText = 'text-blue-700 dark:text-blue-400 font-bold';
-        }
-
-        stepsHtml += `
-            <div class="flex flex-col items-center text-center relative z-10 flex-1 px-2">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm mb-2 transition-all ${iconBg}">
-                    ${isDone ? '<i class="fa-solid fa-check text-xs"></i>' : s.num}
-                </div>
-                <p class="text-xs ${stepText}">${escapeHTML(s.title)}</p>
-                <p class="text-[10px] text-slate-400 hidden sm:block mt-0.5">${escapeHTML(s.desc)}</p>
-            </div>
-        `;
-    });
-
-    const badgeClasses = {
-        emerald: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800',
-        blue: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-800',
-        amber: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-800'
-    };
-
-    resultContainer.innerHTML = `
-        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 sm:p-8 shadow-sm">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-700">
-                <div>
-                    <div class="flex items-center gap-3">
-                        <span class="font-mono text-xl font-extrabold text-slate-900 dark:text-white">${escapeHTML(order.ticket)}</span>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${badgeClasses[order.statusColor] || badgeClasses.blue}">
-                            <span class="w-2 h-2 rounded-full bg-current mr-2 status-indicator-dot"></span>
-                            ${escapeHTML(order.statusBadge)}
-                        </span>
-                    </div>
-                    <p class="text-sm font-semibold text-slate-700 dark:text-slate-300 mt-1">${escapeHTML(order.device)}</p>
-                </div>
-                <div class="text-xs text-slate-500 dark:text-slate-400 sm:text-right">
-                    <p>Ingreso: <strong class="text-slate-700 dark:text-slate-200">${escapeHTML(order.receivedAt)}</strong></p>
-                    <p>Asignado: <strong class="text-slate-700 dark:text-slate-200">${escapeHTML(order.technician)}</strong></p>
-                </div>
-            </div>
-
-            <!-- Línea de Tiempo de Estados -->
-            <div class="py-8 relative">
-                <div class="flex items-center justify-between relative">
-                    ${stepsHtml}
-                </div>
-            </div>
-
-            <div class="bg-slate-50 dark:bg-slate-900/60 rounded-xl p-4 border border-slate-100 dark:border-slate-700/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div class="space-y-1">
-                    <p class="text-xs uppercase font-bold text-slate-400">Servicio y Notas Técnicas:</p>
-                    <p class="text-sm text-slate-700 dark:text-slate-300 font-medium">${escapeHTML(order.service)}</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 italic">${escapeHTML(order.notes)}</p>
-                </div>
-                <a href="https://wa.me/529711601042?text=Hola,%20quisiera%20consultar%20el%20ticket%20${encodeURIComponent(order.ticket)}" target="_blank" rel="noopener noreferrer" class="shrink-0 inline-flex items-center px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs shadow-sm transition-colors">
-                    <i class="fa-brands fa-whatsapp text-sm mr-2"></i> Preguntar por WhatsApp
-                </a>
-            </div>
-        </div>
-    `;
-}
-
-/* ==========================================================================
-   5. Slider Interactivo Antes / Después (Comparativa visual táctil)
+   4. Slider Interactivo Antes / Después (Comparativa visual táctil)
    ========================================================================== */
 const sliderCases = {
     screen: {
@@ -551,7 +355,7 @@ function loadSliderCase(key) {
 }
 
 /* ==========================================================================
-   6. Acordeón de Preguntas Frecuentes (FAQ Accesible)
+   5. Acordeón de Preguntas Frecuentes (FAQ Accesible)
    ========================================================================== */
 function initFaqAccordion() {
     const faqButtons = document.querySelectorAll('.faq-toggle-btn');
@@ -581,7 +385,7 @@ function initFaqAccordion() {
 }
 
 /* ==========================================================================
-   7. Formulario de Contacto Directo con Reenvío a WhatsApp
+   6. Formulario de Contacto Directo con Reenvío a WhatsApp
    ========================================================================== */
 function initContactForm() {
     const form = document.getElementById('contact-form');
@@ -615,7 +419,7 @@ function initContactForm() {
 }
 
 /* ==========================================================================
-   8. Modales Accesibles de Privacidad y Términos de Servicio
+   7. Modales Accesibles de Privacidad y Términos de Servicio
    ========================================================================== */
 function initModals() {
     window.openModal = function (modalId) {
@@ -662,79 +466,81 @@ function initModals() {
 }
 
 /* ==========================================================================
-   9. Estado Dinámico de Horario de Atención (Disponible / Fuera de servicio)
-   Horarios:
-   - Lunes a Sábado: 9:00 AM a 8:00 PM (9am a 8pm)
-   - Domingos: 11:00 AM a 6:00 PM (11am a 6pm)
+   8. Estado Dinámico de Atención (En Línea y Mostrador)
+   - Encabezado / Barra superior: "Disponible en línea" constante para atención digital.
+   - Estado del Mostrador:
+     * Lunes a Sábado: 9:00 AM a 4:00 PM (9am a 4pm)
+     * Domingos: 11:00 AM a 4:00 PM (11am a 4pm)
+     * Dentro de horario: "Disponible"
+     * Fuera de horario: "No disponible"
    ========================================================================== */
 function initBusinessHoursStatus() {
-    function checkBusinessHours() {
+    function checkMostradorHours() {
         const now = new Date();
         const day = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
         const currentHour = now.getHours() + (now.getMinutes() / 60);
 
-        // Lunes (1) a Sábado (6): 9:00 AM a 8:00 PM (9.0 a 20.0)
+        // Lunes (1) a Sábado (6): 9:00 AM a 4:00 PM (9.0 a 16.0)
         if (day >= 1 && day <= 6) {
-            return currentHour >= 9.0 && currentHour < 20.0;
+            return currentHour >= 9.0 && currentHour < 16.0;
         }
 
-        // Domingo (0): 11:00 AM a 6:00 PM (11.0 a 18.0)
+        // Domingo (0): 11:00 AM a 4:00 PM (11.0 a 16.0)
         if (day === 0) {
-            return currentHour >= 11.0 && currentHour < 18.0;
+            return currentHour >= 11.0 && currentHour < 16.0;
         }
 
         return false;
     }
 
     function updateStatusUI() {
-        const isOpen = checkBusinessHours();
-
-        // Barra superior
+        // 1. Barra superior: Siempre "Disponible en línea"
         const statusBadge = document.getElementById('business-status-badge');
-        const statusDot = document.getElementById('business-status-dot');
         const statusText = document.getElementById('business-status-text');
+
+        if (statusBadge) {
+            statusBadge.classList.add('status-open');
+            statusBadge.classList.remove('status-closed');
+        }
+        if (statusText) {
+            statusText.textContent = 'Disponible en línea';
+        }
+
+        // 2. Estado del Mostrador (Hero y Contacto)
+        const isMostradorOpen = checkMostradorHours();
 
         // Tarjeta Hero
         const heroPill = document.getElementById('hero-status-pill');
-        const heroDot = document.getElementById('hero-status-dot');
         const heroText = document.getElementById('hero-status-text');
 
         // Sección de contacto
         const contactNote = document.getElementById('contact-status-note');
 
-        if (isOpen) {
-            if (statusBadge) {
-                statusBadge.classList.add('status-open');
-                statusBadge.classList.remove('status-closed');
-            }
-            if (statusText) statusText.textContent = 'Disponible';
-
+        if (isMostradorOpen) {
             if (heroPill) {
                 heroPill.classList.add('status-open');
                 heroPill.classList.remove('status-closed');
             }
-            if (heroText) heroText.textContent = 'Disponible';
+            if (heroText) {
+                heroText.textContent = 'Disponible';
+            }
 
             if (contactNote) {
                 contactNote.style.color = 'var(--brand-emerald)';
                 contactNote.textContent = '● Actualmente Disponible';
             }
         } else {
-            if (statusBadge) {
-                statusBadge.classList.add('status-closed');
-                statusBadge.classList.remove('status-open');
-            }
-            if (statusText) statusText.textContent = 'Fuera de servicio';
-
             if (heroPill) {
                 heroPill.classList.add('status-closed');
                 heroPill.classList.remove('status-open');
             }
-            if (heroText) heroText.textContent = 'Fuera de servicio';
+            if (heroText) {
+                heroText.textContent = 'No disponible';
+            }
 
             if (contactNote) {
                 contactNote.style.color = 'var(--brand-amber)';
-                contactNote.textContent = '○ Fuera de servicio (Abrimos según horario)';
+                contactNote.textContent = '○ No disponible (Consulte horarios de atención)';
             }
         }
     }
