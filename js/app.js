@@ -83,7 +83,7 @@ function initMobileMenu() {
    ========================================================================== */
 const quoteDatabase = {
     celular: {
-        brands: ['Samsung Galaxy', 'Xiaomi / Redmi / Poco', 'Motorola', 'Huawei / Honor', 'Otro'],
+        brands: ['Apple iPhone', 'Samsung Galaxy', 'Xiaomi / Redmi / Poco', 'Motorola', 'Huawei / Honor', 'Otro'],
         issues: [
             { id: 'pantalla', name: 'Pantalla rota / Táctil dañado / Sin imagen', time: 'Una vez que llegue la refacción se hace el cambio (2 a 5 días hábiles)', price: '$650 - $2,400 MXN', note: 'Calidad Original / OLED con True Tone, según solicitado por el cliente' },
             { id: 'bateria', name: 'Batería inflada / Se descarga rápido', time: 'Una vez que llegue la refacción se hace el cambio (2 a 5 días hábiles)', price: '$450 - $950 MXN', note: 'Ciclos en 0 y 100% de salud' },
@@ -129,128 +129,277 @@ const quoteDatabase = {
 };
 
 let currentQuote = {
-    deviceType: 'celular',
-    brand: 'Samsung Galaxy',
-    issueIndex: 0
+    deviceType: null,
+    brand: '',
+    issueIndex: -1
+};
+
+let currentQuoteStep = 1;
+
+const quoteDeviceNames = {
+    celular: 'Celular / Smartphone',
+    tablet: 'Tablet / iPad',
+    laptop: 'Laptop / Portátil',
+    pc: 'Computadora de Escritorio / PC Gamer'
 };
 
 function initQuoteCalculator() {
-    const deviceButtons = document.querySelectorAll('.device-select-btn');
+    const deviceButtons = [...document.querySelectorAll('.device-select-btn')];
     const brandSelect = document.getElementById('quote-brand');
     const issueSelect = document.getElementById('quote-issue');
 
     if (!deviceButtons.length || !brandSelect || !issueSelect) return;
 
-    // Click en tipo de dispositivo
     deviceButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            deviceButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            const deviceChanged = currentQuote.deviceType !== btn.dataset.device;
+            deviceButtons.forEach(button => {
+                const isSelected = button === btn;
+                button.classList.toggle('active', isSelected);
+                button.setAttribute('aria-pressed', String(isSelected));
+            });
 
             currentQuote.deviceType = btn.dataset.device;
-            populateBrandOptions();
-            populateIssueOptions();
+            if (deviceChanged) {
+                currentQuote.brand = '';
+                currentQuote.issueIndex = -1;
+                populateBrandOptions();
+                populateIssueOptions();
+            }
             updateQuoteSummary();
+            updateQuoteNavigation();
         });
     });
 
-    brandSelect.addEventListener('change', (e) => {
-        currentQuote.brand = e.target.value;
+    brandSelect.addEventListener('change', event => {
+        currentQuote.brand = event.target.value;
         updateQuoteSummary();
+        updateQuoteNavigation();
     });
 
-    issueSelect.addEventListener('change', (e) => {
-        currentQuote.issueIndex = parseInt(e.target.value, 10);
+    issueSelect.addEventListener('change', event => {
+        currentQuote.issueIndex = event.target.value === '' ? -1 : Number.parseInt(event.target.value, 10);
         updateQuoteSummary();
+        updateQuoteNavigation();
     });
 
-    // Inicializar listas
-    populateBrandOptions();
-    populateIssueOptions();
-    updateQuoteSummary();
+    document.getElementById('quote-next-1')?.addEventListener('click', () => {
+        if (!currentQuote.deviceType) return;
+        setQuoteStep(2);
+    });
+    document.getElementById('quote-back-2')?.addEventListener('click', () => setQuoteStep(1));
+    document.getElementById('quote-next-2')?.addEventListener('click', () => {
+        if (!currentQuote.brand) return;
+        setQuoteStep(3);
+    });
+    document.getElementById('quote-back-3')?.addEventListener('click', () => setQuoteStep(2));
 
-    // Botón de WhatsApp en la cotización
+    document.getElementById('quote-show-estimate-btn')?.addEventListener('click', () => {
+        if (!isQuoteComplete()) return;
+        const summaryCard = document.getElementById('quote-summary-card');
+        const summaryHeading = document.getElementById('summary-device');
+        if (!summaryCard || !summaryHeading) return;
+
+        summaryCard.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+            block: 'center'
+        });
+        summaryHeading.focus({ preventScroll: true });
+    });
+
+    document.getElementById('quote-help-device-btn')?.addEventListener('click', () => {
+        sendQuoteHelpToWhatsApp('No encuentro mi tipo de equipo en el cotizador.');
+    });
+    document.getElementById('quote-issue-help-btn')?.addEventListener('click', () => {
+        sendQuoteHelpToWhatsApp('No sé cómo identificar o describir la falla.');
+    });
+
     const quoteWaBtn = document.getElementById('quote-whatsapp-btn');
-    if (quoteWaBtn) {
-        quoteWaBtn.addEventListener('click', sendQuoteToWhatsApp);
+    quoteWaBtn?.addEventListener('click', sendQuoteToWhatsApp);
+
+    setQuoteStep(1, { focus: false });
+    updateQuoteSummary();
+    updateQuoteNavigation();
+}
+
+function setQuoteStep(step, { focus = true } = {}) {
+    currentQuoteStep = Math.min(3, Math.max(1, Number(step)));
+
+    document.querySelectorAll('[data-quote-panel]').forEach(panel => {
+        const isCurrent = Number(panel.dataset.quotePanel) === currentQuoteStep;
+        panel.hidden = !isCurrent;
+        panel.classList.toggle('is-current', isCurrent);
+    });
+
+    document.querySelectorAll('[data-quote-indicator]').forEach(indicator => {
+        const indicatorStep = Number(indicator.dataset.quoteIndicator);
+        const isCurrent = indicatorStep === currentQuoteStep;
+        indicator.classList.toggle('is-current', isCurrent);
+        indicator.classList.toggle('is-complete', indicatorStep < currentQuoteStep);
+        if (isCurrent) {
+            indicator.setAttribute('aria-current', 'step');
+        } else {
+            indicator.removeAttribute('aria-current');
+        }
+    });
+
+    const stepDescriptions = {
+        1: 'elige tu equipo',
+        2: 'selecciona la marca o tipo',
+        3: 'cuéntanos qué problema presenta'
+    };
+    const status = document.getElementById('quote-step-status');
+    if (status) status.textContent = `Paso ${currentQuoteStep} de 3: ${stepDescriptions[currentQuoteStep]}.`;
+
+    updateQuoteNavigation();
+
+    if (focus) {
+        const heading = document.querySelector(`[data-quote-panel="${currentQuoteStep}"] h3`);
+        requestAnimationFrame(() => heading?.focus({ preventScroll: true }));
     }
+}
+
+function updateQuoteNavigation() {
+    const nextDevice = document.getElementById('quote-next-1');
+    const nextBrand = document.getElementById('quote-next-2');
+    const showEstimate = document.getElementById('quote-show-estimate-btn');
+
+    if (nextDevice) nextDevice.disabled = !currentQuote.deviceType;
+    if (nextBrand) nextBrand.disabled = !currentQuote.brand;
+    if (showEstimate) showEstimate.disabled = !isQuoteComplete();
 }
 
 function populateBrandOptions() {
     const brandSelect = document.getElementById('quote-brand');
     if (!brandSelect) return;
-    const currentData = quoteDatabase[currentQuote.deviceType];
 
     brandSelect.innerHTML = '';
-    currentData.brands.forEach((brand, index) => {
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Selecciona una opción';
+    placeholder.selected = true;
+    brandSelect.appendChild(placeholder);
+
+    const currentData = currentQuote.deviceType ? quoteDatabase[currentQuote.deviceType] : null;
+    if (!currentData) return;
+
+    currentData.brands.forEach(brand => {
         const option = document.createElement('option');
         option.value = brand;
         option.textContent = brand;
-        if (index === 0) option.selected = true;
         brandSelect.appendChild(option);
     });
-    currentQuote.brand = currentData.brands[0];
+
+    const unknownOption = document.createElement('option');
+    unknownOption.value = 'No conozco la marca';
+    unknownOption.textContent = 'No conozco la marca';
+    brandSelect.appendChild(unknownOption);
 }
 
 function populateIssueOptions() {
     const issueSelect = document.getElementById('quote-issue');
     if (!issueSelect) return;
-    const currentData = quoteDatabase[currentQuote.deviceType];
 
     issueSelect.innerHTML = '';
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Selecciona una falla';
+    placeholder.selected = true;
+    issueSelect.appendChild(placeholder);
+
+    const currentData = currentQuote.deviceType ? quoteDatabase[currentQuote.deviceType] : null;
+    if (!currentData) return;
+
     currentData.issues.forEach((issue, index) => {
         const option = document.createElement('option');
-        option.value = index;
+        option.value = String(index);
         option.textContent = issue.name;
-        if (index === 0) option.selected = true;
         issueSelect.appendChild(option);
     });
-    currentQuote.issueIndex = 0;
+}
+
+function getCurrentQuoteIssue() {
+    const data = currentQuote.deviceType ? quoteDatabase[currentQuote.deviceType] : null;
+    if (!data || !Number.isInteger(currentQuote.issueIndex) || currentQuote.issueIndex < 0) return null;
+    return data.issues[currentQuote.issueIndex] || null;
+}
+
+function isQuoteComplete() {
+    return Boolean(currentQuote.deviceType && currentQuote.brand && getCurrentQuoteIssue());
 }
 
 function updateQuoteSummary() {
-    const data = quoteDatabase[currentQuote.deviceType];
-    const issue = data.issues[currentQuote.issueIndex];
-
-    const deviceNameMap = {
-        celular: 'Celular / Smartphone',
-        tablet: 'Tablet / iPad',
-        laptop: 'Laptop / Portátil',
-        pc: 'Computadora de Escritorio / PC Gamer'
-    };
-
     const summaryDevice = document.getElementById('summary-device');
     const summaryIssue = document.getElementById('summary-issue');
     const summaryTime = document.getElementById('summary-time');
     const summaryPrice = document.getElementById('summary-price');
     const summaryNote = document.getElementById('summary-note');
+    const quoteWaBtn = document.getElementById('quote-whatsapp-btn');
+    const replyNote = document.getElementById('quote-reply-note');
+    const issue = getCurrentQuoteIssue();
+    const quoteComplete = isQuoteComplete();
 
-    if (summaryDevice) summaryDevice.textContent = `${deviceNameMap[currentQuote.deviceType]} (${currentQuote.brand})`;
-    if (summaryIssue) summaryIssue.textContent = issue.name;
-    if (summaryTime) summaryTime.textContent = issue.time;
-    if (summaryPrice) summaryPrice.textContent = issue.price;
-    if (summaryNote) summaryNote.textContent = issue.note;
+    if (summaryDevice) {
+        summaryDevice.textContent = currentQuote.deviceType
+            ? `${quoteDeviceNames[currentQuote.deviceType]} (${currentQuote.brand || 'marca pendiente'})`
+            : 'Elige tu equipo';
+    }
+    if (summaryIssue) {
+        summaryIssue.textContent = issue
+            ? issue.name
+            : currentQuote.deviceType
+                ? 'Selecciona una falla para ver el estimado'
+                : 'Tu selección aparecerá aquí';
+    }
+    if (summaryTime) summaryTime.textContent = issue ? issue.time : 'Por confirmar';
+    if (summaryPrice) summaryPrice.textContent = issue ? issue.price : 'Por confirmar';
+    if (summaryNote) {
+        summaryNote.textContent = issue
+            ? issue.note
+            : 'Completa los pasos para consultar el estimado.';
+    }
+    if (quoteWaBtn) quoteWaBtn.disabled = !quoteComplete;
+    if (replyNote) {
+        replyNote.textContent = quoteComplete
+            ? 'Estimado listo. El taller confirma el presupuesto después de revisar el equipo.'
+            : issue && !currentQuote.brand
+                ? 'Selecciona una marca o “No conozco la marca” para continuar.'
+                : 'Completa los tres pasos para enviar tu estimado.';
+    }
 }
 
 function sendQuoteToWhatsApp() {
-    const data = quoteDatabase[currentQuote.deviceType];
-    const issue = data.issues[currentQuote.issueIndex];
+    const issue = getCurrentQuoteIssue();
+    if (!currentQuote.deviceType || !currentQuote.brand || !issue) return;
 
-    const deviceNameMap = {
-        celular: 'Celular',
-        tablet: 'Tablet / iPad',
-        laptop: 'Laptop',
-        pc: 'PC de Escritorio / Gamer'
-    };
+    const text = [
+        'Hola TechFix, consulté el cotizador de su página y quiero confirmar disponibilidad:',
+        '',
+        `Equipo: ${quoteDeviceNames[currentQuote.deviceType]} - ${currentQuote.brand}`,
+        `Falla a revisar: ${issue.name}`,
+        `Tiempo estimado: ${issue.time}`,
+        `Rango aproximado: ${issue.price}`,
+        '',
+        '¿Tienen disponibilidad para revisar mi equipo?'
+    ].join('\n');
 
-    const text = `Hola TechFix, coticé en su página web y deseo consultar disponibilidad:%0A%0A` +
-        `*Equipo:* ${encodeURIComponent(deviceNameMap[currentQuote.deviceType])} - ${encodeURIComponent(currentQuote.brand)}%0A` +
-        `*Falla a reparar:* ${encodeURIComponent(issue.name)}%0A` +
-        `*Tiempo estimado mostrado:* ${encodeURIComponent(issue.time)}%0A` +
-        `*Rango aproximado:* ${encodeURIComponent(issue.price)}%0A%0A` +
-        `¿Tienen refacción disponible en taller para agendar mi servicio?`;
+    window.open(`https://wa.me/529711601042?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+}
 
-    window.open(`https://wa.me/529711601042?text=${text}`, '_blank', 'noopener,noreferrer');
+function sendQuoteHelpToWhatsApp(reason) {
+    const device = currentQuote.deviceType ? quoteDeviceNames[currentQuote.deviceType] : 'No estoy seguro del tipo de equipo';
+    const brand = currentQuote.brand || 'No identificada';
+    const issue = getCurrentQuoteIssue();
+    const text = [
+        'Hola TechFix, necesito ayuda para pedir una cotización:',
+        '',
+        `Equipo: ${device}`,
+        `Marca: ${brand}`,
+        `Falla: ${issue ? issue.name : 'No estoy seguro'}`,
+        `Consulta: ${reason}`
+    ].join('\n');
+
+    window.open(`https://wa.me/529711601042?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
 }
 
 /* ==========================================================================

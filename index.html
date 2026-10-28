@@ -219,115 +219,160 @@
 
                 <div class="quote-grid">
 
-                    <!-- Controles del Cotizador (Pasos 1, 2 y 3) -->
+                    <!-- Cotizador guiado en tres pasos -->
                     <div class="quote-controls-card">
+                        <div class="quote-progress">
+                            <p class="quote-progress-heading">Tu cotización</p>
+                            <ol class="quote-progress-list" aria-label="Pasos de cotización">
+                                <li class="quote-progress-step is-current" data-quote-indicator="1" aria-current="step">
+                                    <span class="quote-progress-number">1</span>
+                                    <span class="quote-progress-label">Equipo</span>
+                                </li>
+                                <li class="quote-progress-step" data-quote-indicator="2">
+                                    <span class="quote-progress-number">2</span>
+                                    <span class="quote-progress-label">Marca</span>
+                                </li>
+                                <li class="quote-progress-step" data-quote-indicator="3">
+                                    <span class="quote-progress-number">3</span>
+                                    <span class="quote-progress-label">Falla</span>
+                                </li>
+                            </ol>
+                            <p id="quote-step-status" class="quote-progress-status" aria-live="polite">Paso 1 de 3: elige tu equipo.</p>
+                        </div>
 
-                        <!-- Paso 1: Tipo de Dispositivo -->
-                        <div>
-                            <label class="quote-step-title">
-                                1. Selecciona tu dispositivo
-                            </label>
-                            <div class="device-buttons-grid">
-                                <button type="button" data-device="celular" class="device-select-btn active">
-                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                        <div class="quote-step-panel" data-quote-panel="1" role="group" aria-labelledby="quote-step-1-title">
+                            <div class="quote-step-heading">
+                                <span class="quote-step-kicker">Paso 1 de 3</span>
+                                <h3 id="quote-step-1-title" tabindex="-1">¿Qué equipo necesitas reparar?</h3>
+                                <p>Elige el tipo de equipo para mostrarte las opciones adecuadas.</p>
+                            </div>
+                            <div class="device-buttons-grid" role="group" aria-labelledby="quote-step-1-title">
+                                <button type="button" data-device="celular" class="device-select-btn" aria-pressed="false">
+                                    <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
                                     <span>Celular</span>
                                 </button>
-                                <button type="button" data-device="tablet" class="device-select-btn">
-                                    <i class="fa-solid fa-tablet-screen-button"></i>
+                                <button type="button" data-device="tablet" class="device-select-btn" aria-pressed="false">
+                                    <i class="fa-solid fa-tablet-screen-button" aria-hidden="true"></i>
                                     <span>Tablet / iPad</span>
                                 </button>
-                                <button type="button" data-device="laptop" class="device-select-btn">
-                                    <i class="fa-solid fa-laptop"></i>
+                                <button type="button" data-device="laptop" class="device-select-btn" aria-pressed="false">
+                                    <i class="fa-solid fa-laptop" aria-hidden="true"></i>
                                     <span>Laptop</span>
                                 </button>
-                                <button type="button" data-device="pc" class="device-select-btn">
-                                    <i class="fa-solid fa-desktop"></i>
+                                <button type="button" data-device="pc" class="device-select-btn" aria-pressed="false">
+                                    <i class="fa-solid fa-desktop" aria-hidden="true"></i>
                                     <span>PC / Gamer</span>
                                 </button>
                             </div>
+                            <div class="quote-step-actions quote-step-actions-end">
+                                <button id="quote-next-1" type="button" class="quote-step-next" disabled>
+                                    Continuar con la marca <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <button id="quote-help-device-btn" type="button" class="quote-help-btn">¿No encuentras tu equipo? Escríbenos</button>
                         </div>
 
-                        <!-- Paso 2: Marca o Fabricante -->
-                        <div class="form-field">
-                            <label for="quote-brand" class="quote-step-title">
-                                2. Marca o Fabricante
-                            </label>
-                            <select id="quote-brand" class="form-select">
-                                <!-- Opciones cargadas dinámicamente por js/app.js -->
-                            </select>
+                        <div class="quote-step-panel" data-quote-panel="2" role="group" aria-labelledby="quote-step-2-title" hidden>
+                            <div class="quote-step-heading">
+                                <span class="quote-step-kicker">Paso 2 de 3</span>
+                                <h3 id="quote-step-2-title" tabindex="-1">¿De qué marca es tu equipo?</h3>
+                                <p>Si no conoces la marca exacta, elige la opción más parecida.</p>
+                            </div>
+                            <div class="form-field">
+                                <label for="quote-brand" class="quote-step-title">Marca o tipo de equipo</label>
+                                <select id="quote-brand" class="form-select" aria-describedby="quote-brand-help">
+                                    <option value="">Selecciona una opción</option>
+                                </select>
+                                <p id="quote-brand-help" class="quote-field-help">También puedes elegir “No conozco la marca”.</p>
+                            </div>
+                            <div class="quote-step-actions">
+                                <button id="quote-back-2" type="button" class="quote-step-back">
+                                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver
+                                </button>
+                                <button id="quote-next-2" type="button" class="quote-step-next" disabled>
+                                    Continuar con la falla <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
 
-                        <!-- Paso 3: Falla / Reparación -->
-                        <div class="form-field">
-                            <label for="quote-issue" class="quote-step-title">
-                                3. ¿Qué problema presenta tu equipo?
-                            </label>
-                            <select id="quote-issue" class="form-select">
-                                <!-- Opciones cargadas dinámicamente por js/app.js -->
-                            </select>
+                        <div class="quote-step-panel" data-quote-panel="3" role="group" aria-labelledby="quote-step-3-title" hidden>
+                            <div class="quote-step-heading">
+                                <span class="quote-step-kicker">Paso 3 de 3</span>
+                                <h3 id="quote-step-3-title" tabindex="-1">¿Qué le sucede a tu equipo?</h3>
+                                <p>Selecciona el problema que más se parezca al que notas.</p>
+                            </div>
+                            <div class="form-field">
+                                <label for="quote-issue" class="quote-step-title">Problema o reparación</label>
+                                <select id="quote-issue" class="form-select" aria-describedby="quote-issue-help">
+                                    <option value="">Selecciona una falla</option>
+                                </select>
+                                <p id="quote-issue-help" class="quote-field-help">El diagnóstico final se confirma al revisar el equipo.</p>
+                            </div>
+                            <button id="quote-issue-help-btn" type="button" class="quote-help-btn">
+                                No sé cómo describir la falla — pedir ayuda por WhatsApp
+                            </button>
+                            <div class="quote-step-actions">
+                                <button id="quote-back-3" type="button" class="quote-step-back">
+                                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver
+                                </button>
+                                <button id="quote-show-estimate-btn" type="button" class="quote-step-next" disabled>
+                                    Ver mi estimado <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
 
-                        <!-- Nota orientativa -->
                         <p class="quote-disclaimer">
-                            <i class="fa-solid fa-circle-info"></i>
-                            Los rangos de precio son orientativos y contemplan refacción y mano de obra. El presupuesto
-                            final exacto se confirma en mostrador tras la inspección física.
+                            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                            Los rangos son orientativos e incluyen refacción y mano de obra. El presupuesto final se confirma después de revisar el equipo.
                         </p>
                     </div>
 
-                    <!-- Tarjeta de Resumen en Tiempo Real -->
-                    <div class="quote-summary-card">
+                    <!-- Resumen actualizado durante la selección -->
+                    <div id="quote-summary-card" class="quote-summary-card" role="region" aria-labelledby="quote-summary-title">
                         <div class="summary-header">
                             <div>
-                                <span class="summary-eyebrow">Resumen Estimado</span>
-                                <h3 id="summary-device" class="summary-device-title">Celular / Smartphone</h3>
+                                <span id="quote-summary-title" class="summary-eyebrow">Resumen estimado</span>
+                                <h3 id="summary-device" class="summary-device-title" tabindex="-1">Elige tu equipo</h3>
                             </div>
-                            <span class="summary-icon-box">
+                            <span class="summary-icon-box" aria-hidden="true">
                                 <i class="fa-solid fa-receipt"></i>
                             </span>
                         </div>
 
                         <div class="summary-details">
                             <div>
-                                <p class="metric-label">Servicio Seleccionado:</p>
-                                <p id="summary-issue" class="summary-issue-title">Pantalla rota / Táctil dañado</p>
-                                <p id="summary-note" class="summary-issue-note">Calidad Original / OLED con True Tone
-                                </p>
+                                <p class="metric-label">Problema</p>
+                                <p id="summary-issue" class="summary-issue-title">Tu selección aparecerá aquí</p>
+                                <p id="summary-note" class="summary-issue-note">Completa los pasos para consultar el estimado.</p>
                             </div>
 
                             <div class="summary-metrics-grid">
                                 <div>
-                                    <p class="metric-label">Tiempo de Entrega</p>
-                                    <p id="summary-time" class="metric-value-time">45 a 90 min</p>
+                                    <p class="metric-label">Tiempo estimado</p>
+                                    <p id="summary-time" class="metric-value-time">Por confirmar</p>
                                 </div>
                                 <div>
-                                    <p class="metric-label">Costo Estimado</p>
-                                    <p id="summary-price" class="metric-value-price">$650 - $2,400 MXN</p>
+                                    <p class="metric-label">Costo estimado</p>
+                                    <p id="summary-price" class="metric-value-price">Por confirmar</p>
                                 </div>
                             </div>
 
                             <div class="included-services">
-                                <p class="included-title">Incluido en cada intervención:</p>
+                                <p class="included-title">Cada intervención incluye:</p>
                                 <ul class="included-list">
-                                    <li>
-                                        <i class="fa-solid fa-check"></i> Mano de obra
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-check"></i> Refacción
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-check"></i> Limpieza superficial de puertos y rejillas
-                                    </li>
+                                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> Mano de obra</li>
+                                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> Refacción</li>
+                                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> Limpieza superficial de puertos y rejillas</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div>
-                            <button id="quote-whatsapp-btn" type="button" class="btn-whatsapp-quote">
-                                <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i>
-                                Enviar Cotización por WhatsApp
+                            <button id="quote-whatsapp-btn" type="button" class="btn-whatsapp-quote" disabled aria-describedby="quote-reply-note">
+                                <i class="fa-brands fa-whatsapp" aria-hidden="true" style="font-size: 1.25rem;"></i>
+                                Enviar cotización por WhatsApp
                             </button>
-                            <p class="quote-reply-note">Te contestamos en menos de 10 minutos en horario laboral.</p>
+                            <p id="quote-reply-note" class="quote-reply-note" aria-live="polite">Completa los tres pasos para enviar tu estimado.</p>
                         </div>
                     </div>
 

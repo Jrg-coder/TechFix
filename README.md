@@ -14,7 +14,8 @@ Sitio web moderno, de alto rendimiento y enfocado a conversión para un taller o
      - **Fuera de estos horarios:** Cambia automáticamente a **"No disponible"** en la tarjeta de Estado del Mostrador y en la sección de contacto.
 
 2. **Cotizador Express Interactivo**:
-   - Selección por tipo de equipo: Celulares, Tablets, Laptops y PCs Gamer/Oficina.
+   - Flujo guiado de tres pasos con indicador de progreso para elegir equipo, marca y falla.
+   - Opción para pedir orientación por WhatsApp si la persona no reconoce su equipo o no sabe describir la falla.
    - Cálculo en tiempo real de tiempo de entrega estimado, rango de precio referencial y especificaciones del servicio.
    - Botón directo para enviar la cotización pre-redactada a WhatsApp con 1 solo clic.
 
